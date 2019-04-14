@@ -112,7 +112,7 @@ KEYMAPS(
   [PRIMARY] = KEYMAP_STACKED
   (___,          Key_1, Key_2, Key_3, Key_4, Key_5, Key_LEDEffectNext,
    Key_Backtick, Key_Q, Key_W, Key_E, Key_R, Key_T, Key_Tab,
-   Key_Escape,   Key_A, Key_S, Key_D, Key_F, Key_G,
+   LCTRL(LALT(Key_LeftGui)),   Key_A, Key_S, Key_D, Key_F, Key_G,
    LCTRL(LALT(LSHIFT(Key_LeftGui))), Key_Z, Key_X, Key_C, Key_V, Key_B, Key_Escape,
    OSM(LeftControl), Key_Backspace, OSM(LeftGui), OSM(LeftShift),
    OSL(FUNCTION),
