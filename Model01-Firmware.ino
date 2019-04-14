@@ -112,14 +112,14 @@ KEYMAPS(
    LCTRL(LALT(Key_LeftGui)),   Key_A, Key_S, Key_D, Key_F, Key_G,
    LCTRL(LALT(LSHIFT(Key_LeftGui))), Key_Z, Key_X, Key_C, Key_V, Key_B, Key_Escape,
    OSM(LeftControl), Key_Backspace, OSM(LeftGui), OSM(LeftShift),
-   ShiftToLayer(FUNCTION),
+   OSL(FUNCTION),
 
    M(MACRO_ANY),  Key_6, Key_7, Key_8,     Key_9,         Key_0,         Key_Backspace,
    Key_Enter,     Key_Y, Key_U, Key_I,     Key_O,         Key_P,         Key_Equals,
                   Key_H, Key_J, Key_K,     Key_L,         Key_Semicolon, Key_Quote,
    Key_Backspace,  Key_N, Key_M, Key_Comma, Key_Period,    Key_Slash,     Key_Minus,
    OSM(RightShift), OSM(LeftAlt), Key_Spacebar, OSM(RightControl),
-   ShiftToLayer(FUNCTION)),
+   OSL(FUNCTION)),
 
 #elif defined (PRIMARY_KEYMAP_DVORAK)
 
@@ -286,9 +286,9 @@ KALEIDOSCOPE_INIT_PLUGINS(
   EscapeOneShot,
   Macros,
   MouseKeys,
-  ActiveModColorEffect
+  ActiveModColorEffect,
   FocusSettingsCommand,
-  FocusEEPROMCommand,
+  FocusEEPROMCommand
 );
 
 /** The 'setup' function is one of the two standard Arduino sketch functions.
