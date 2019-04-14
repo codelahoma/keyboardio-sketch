@@ -21,7 +21,6 @@
 #include "Kaleidoscope-Model01-TestMode.h"
 #include "Kaleidoscope-MouseKeys.h"
 #include "Kaleidoscope-NumPad.h"
-#include <Kaleidoscope-IdleLEDs.h>
 #include <Kaleidoscope-LED-ActiveModColor.h>
 
 enum { MACRO_VERSION_INFO,
@@ -287,7 +286,6 @@ KALEIDOSCOPE_INIT_PLUGINS(
   TestMode,
   LEDControl,
   LEDOff,
-  IdleLEDs,
   ColormapEffect,
   NumPad,
   OneShot,
