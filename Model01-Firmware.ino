@@ -18,9 +18,7 @@
 #include "Kaleidoscope-FocusSerial.h"
 #include "Kaleidoscope-LEDControl.h"
 #include "Kaleidoscope-Macros.h"
-#include "Kaleidoscope-Model01-TestMode.h"
 #include "Kaleidoscope-MouseKeys.h"
-#include "Kaleidoscope-NumPad.h"
 #include <Kaleidoscope-LED-ActiveModColor.h>
 
 enum { MACRO_VERSION_INFO,
@@ -278,21 +276,19 @@ const macro_t *macroAction(uint8_t macroIndex, uint8_t keyState) {
 // The order can be important. For example, LED effects are
 // added in the order they're listed here.
 KALEIDOSCOPE_INIT_PLUGINS(
-  EEPROMSettings,
-  EEPROMKeymap,
   Focus,
-  FocusSettingsCommand,
-  FocusEEPROMCommand,
-  TestMode,
   LEDControl,
   LEDOff,
+  EEPROMSettings,
+  EEPROMKeymap,
   ColormapEffect,
-  NumPad,
   OneShot,
   EscapeOneShot,
   Macros,
   MouseKeys,
   ActiveModColorEffect
+  FocusSettingsCommand,
+  FocusEEPROMCommand,
 );
 
 /** The 'setup' function is one of the two standard Arduino sketch functions.
