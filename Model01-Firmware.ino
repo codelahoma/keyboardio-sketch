@@ -316,6 +316,9 @@ void setup() {
 
   LEDOff.activate();
 
+  MouseWrapper.speedLimit = 64;
+  MouseKeys.speed = 10;
+  MouseKeys.accelDelay = 35;
   // To make the keymap editable without flashing new firmware, we store
   // additional layers in EEPROM. For now, we reserve space for five layers. If
   // one wants to use these layers, just set the default layer to one in EEPROM,
