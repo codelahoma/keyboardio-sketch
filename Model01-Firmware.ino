@@ -17,6 +17,7 @@
 #include <Kaleidoscope-Escape-OneShot.h>
 #include "Kaleidoscope-FocusSerial.h"
 #include "Kaleidoscope-LEDControl.h"
+#include "Kaleidoscope-LEDEffect-DigitalRain.h"
 #include "Kaleidoscope-Macros.h"
 #include "Kaleidoscope-MouseKeys.h"
 #include <Kaleidoscope-LED-ActiveModColor.h>
@@ -102,6 +103,8 @@ enum { PRIMARY, NUMPAD, FUNCTION }; // layers
  *   so we can make the keymaps actually resemble the physical key layout better
  */
 // *INDENT-OFF*
+#define Key_MyHyper LCTRL(LALT(LSHIFT(Key_LeftGui)))
+#define Key_Magic LCTRL(LALT(Key_LeftGui))
 
 KEYMAPS(
 
@@ -109,17 +112,17 @@ KEYMAPS(
   [PRIMARY] = KEYMAP_STACKED
   (___,          Key_1, Key_2, Key_3, Key_4, Key_5, Key_LEDEffectNext,
    Key_Backtick, Key_Q, Key_W, Key_E, Key_R, Key_T, Key_Tab,
-   LCTRL(LALT(Key_LeftGui)),   Key_A, Key_S, Key_D, Key_F, Key_G,
-   LCTRL(LALT(LSHIFT(Key_LeftGui))), Key_Z, Key_X, Key_C, Key_V, Key_B, Key_Escape,
-   OSM(LeftControl), Key_Backspace, OSM(LeftGui), OSM(LeftShift),
-   OSL(FUNCTION),
+   Key_Magic,   Key_A, Key_S, Key_D, Key_F, Key_G,
+   Key_MyHyper, Key_Z, Key_X, Key_C, Key_V, Key_B, Key_Escape,
+   OSM(RightControl), Key_Backspace, OSM(RightShift), Key_Escape,
+   ShiftToLayer(FUNCTION),
 
    M(MACRO_ANY),  Key_6, Key_7, Key_8,     Key_9,         Key_0,         Key_Backspace,
    Key_Enter,     Key_Y, Key_U, Key_I,     Key_O,         Key_P,         Key_Equals,
                   Key_H, Key_J, Key_K,     Key_L,         Key_Semicolon, Key_Quote,
    Key_Backspace,  Key_N, Key_M, Key_Comma, Key_Period,    Key_Slash,     Key_Minus,
-   OSM(RightShift), OSM(LeftAlt), Key_Spacebar, OSM(RightControl),
-   OSL(FUNCTION)),
+   OSM(LeftGui), Key_Enter, Key_Spacebar, OSM(LeftAlt),
+   ShiftToLayer(FUNCTION)),
 
 #elif defined (PRIMARY_KEYMAP_DVORAK)
 
@@ -279,6 +282,7 @@ KALEIDOSCOPE_INIT_PLUGINS(
   Focus,
   LEDControl,
   LEDOff,
+  LEDDigitalRainEffect,
   EEPROMSettings,
   EEPROMKeymap,
   ColormapEffect,
@@ -304,7 +308,7 @@ void setup() {
   // First, call Kaleidoscope's internal setup function
   Kaleidoscope.setup();
 
-  LEDOff.activate();
+  // LEDOff.activate();
 
   MouseWrapper.speedLimit = 64;
   MouseKeys.speed = 10;
