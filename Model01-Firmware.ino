@@ -21,12 +21,17 @@
 #include "Kaleidoscope-Macros.h"
 #include "Kaleidoscope-MouseKeys.h"
 #include <Kaleidoscope-LED-ActiveModColor.h>
+#include <Kaleidoscope-TapDance.h>
 
 enum { MACRO_VERSION_INFO,
        MACRO_ANY
      };
 
-
+// TapDance enums
+enum { LPBC,
+       RPBC,
+       COLON
+     };
 
 /** The Model 01's key layouts are defined as 'keymaps'. By default, there are three
   * keymaps: The standard QWERTY keymap, the "Function layer" keymap and the "Numpad"
@@ -111,15 +116,15 @@ KEYMAPS(
 #if defined (PRIMARY_KEYMAP_QWERTY)
   [PRIMARY] = KEYMAP_STACKED
   (___,          Key_1, Key_2, Key_3, Key_4, Key_5, Key_LEDEffectNext,
-   Key_Backtick, Key_Q, Key_W, Key_E, Key_R, Key_T, Key_Tab,
+   Key_Backtick, Key_Q, Key_W, Key_E, Key_R, Key_T, TD(LPBC),
    Key_Magic,   Key_A, Key_S, Key_D, Key_F, Key_G,
    Key_MyHyper, Key_Z, Key_X, Key_C, Key_V, Key_B, Key_Escape,
    Key_Enter, Key_Backspace, Key_Tab, Key_Escape,
    OSL(FUNCTION),
 
    M(MACRO_ANY),  Key_6, Key_7, Key_8,     Key_9,         Key_0,         Key_Backspace,
-   Key_Enter,     Key_Y, Key_U, Key_I,     Key_O,         Key_P,         Key_Equals,
-                  Key_H, Key_J, Key_K,     Key_L,         Key_Semicolon, Key_Quote,
+   TD(RPBC),     Key_Y, Key_U, Key_I,     Key_O,         Key_P,         Key_Equals,
+                  Key_H, Key_J, Key_K,     Key_L,         TD(COLON), Key_Quote,
    OSM(LeftGui),  Key_N, Key_M, Key_Comma, Key_Period,    Key_Slash,     Key_Minus,
    OSM(LeftShift), OSM(LeftAlt), Key_Spacebar, OSM(LeftControl),
    OSL(FUNCTION)),
@@ -275,6 +280,20 @@ const macro_t *macroAction(uint8_t macroIndex, uint8_t keyState) {
   return MACRO_NONE;
 }
 
+void tapDanceAction(uint8_t tap_dance_index, byte row, byte col, uint8_t tap_count,
+                    kaleidoscope::plugin::TapDance::ActionType tapDanceAction) {
+  switch (tap_dance_index) {
+  case LPBC:
+    return tapDanceActionKeys(tap_count, tapDanceAction,
+                              Key_LeftParen, Key_LeftBracket, Key_LeftCurlyBracket );
+  case RPBC:
+    return tapDanceActionKeys(tap_count, tapDanceAction,
+                              Key_RightParen, Key_RightBracket, Key_RightCurlyBracket );
+  case COLON:
+    return tapDanceActionKeys(tap_count, tapDanceAction,
+                          LSHIFT(Key_Semicolon), Key_Semicolon);
+  }
+}
 // First, tell Kaleidoscope which plugins you want to use.
 // The order can be important. For example, LED effects are
 // added in the order they're listed here.
@@ -287,6 +306,7 @@ KALEIDOSCOPE_INIT_PLUGINS(
   EEPROMKeymap,
   ColormapEffect,
   OneShot,
+  TapDance,
   EscapeOneShot,
   Macros,
   MouseKeys,
