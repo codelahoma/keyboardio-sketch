@@ -17,11 +17,12 @@
 #include <Kaleidoscope-Escape-OneShot.h>
 #include "Kaleidoscope-FocusSerial.h"
 #include "Kaleidoscope-LEDControl.h"
-#include "Kaleidoscope-LEDEffect-DigitalRain.h"
+// #include "Kaleidoscope-LEDEffect-DigitalRain.h"
 #include "Kaleidoscope-Macros.h"
 #include "Kaleidoscope-MouseKeys.h"
 #include <Kaleidoscope-LED-ActiveModColor.h>
 #include <Kaleidoscope-TapDance.h>
+#include <Kaleidoscope-LED-Wavepool.h>
 
 enum { MACRO_VERSION_INFO,
        MACRO_ANY
@@ -301,7 +302,7 @@ KALEIDOSCOPE_INIT_PLUGINS(
   Focus,
   LEDControl,
   LEDOff,
-  LEDDigitalRainEffect,
+  // LEDDigitalRainEffect,
   EEPROMSettings,
   EEPROMKeymap,
   ColormapEffect,
@@ -312,7 +313,8 @@ KALEIDOSCOPE_INIT_PLUGINS(
   MouseKeys,
   ActiveModColorEffect,
   FocusSettingsCommand,
-  FocusEEPROMCommand
+  FocusEEPROMCommand,
+  WavepoolEffect
 );
 
 /** The 'setup' function is one of the two standard Arduino sketch functions.
@@ -328,6 +330,8 @@ void setup() {
   // First, call Kaleidoscope's internal setup function
   Kaleidoscope.setup();
 
+  WavepoolEffect.idle_timeout = 5000;  // 5 seconds
+  WavepoolEffect.activate();
   // LEDOff.activate();
 
   MouseWrapper.speedLimit = 64;
