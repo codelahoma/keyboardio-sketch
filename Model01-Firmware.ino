@@ -23,6 +23,7 @@
 #include <Kaleidoscope-LED-ActiveModColor.h>
 #include <Kaleidoscope-TapDance.h>
 #include <Kaleidoscope-LED-Wavepool.h>
+#include <Kaleidoscope-LEDEffect-BootAnimation.h>
 
 enum { MACRO_VERSION_INFO,
        MACRO_ANY
@@ -82,7 +83,7 @@ enum { LPBC,
   *
   */
 
-enum { PRIMARY, NUMPAD, FUNCTION }; // layers
+enum { PRIMARY, NUMPAD, FUNCTION, SNAKECASE, _EMPTY }; // layers
 
 
 /**
@@ -123,12 +124,12 @@ KEYMAPS(
    Key_Enter, Key_Backspace, Key_Tab, Key_Escape,
    OSL(FUNCTION),
 
-   M(MACRO_ANY),  Key_6, Key_7, Key_8,     Key_9,         Key_0,         Key_Backspace,
+   M(MACRO_ANY),  Key_6, Key_7, Key_8,     Key_9,         Key_0,         LockLayer(SNAKECASE),
    TD(RPBC),     Key_Y, Key_U, Key_I,     Key_O,         Key_P,         Key_Equals,
                   Key_H, Key_J, Key_K,     Key_L,         TD(COLON), Key_Quote,
-   OSM(LeftGui),  Key_N, Key_M, Key_Comma, Key_Period,    Key_Slash,     Key_Minus,
+   Key_Backslash,  Key_N, Key_M, Key_Comma, Key_Period,    Key_Slash,     Key_Minus,
    OSM(LeftShift), OSM(LeftAlt), Key_Spacebar, OSM(LeftControl),
-   OSL(FUNCTION)),
+   OSM(LeftGui)),
 
 #elif defined (PRIMARY_KEYMAP_DVORAK)
 
@@ -216,7 +217,41 @@ KEYMAPS(
                                Key_LeftArrow,          Key_DownArrow,            Key_UpArrow,              Key_RightArrow,  ___,              ___,
    Key_PcApplication,          Consumer_Mute,          Consumer_VolumeDecrement, Consumer_VolumeIncrement, ___,             Key_Backslash,    Key_Pipe,
    ___, ___, Key_Enter, ___,
-   ___)
+   ___),
+  [SNAKECASE] = KEYMAP_STACKED
+  (
+   ___ ,___ ,___ ,___ ,___ ,___ ,___
+   ,___ ,___ ,___ ,___ ,___ ,___ ,___
+   ,___ ,___ ,___ ,___ ,___ ,___
+   ,___ ,___ ,___ ,___ ,___ ,___ ,___
+   ,___ ,___ ,___ ,___
+   ,___
+
+   ,___ ,___ ,___ ,___ ,___ ,___ ,___
+   ,___ ,___ ,___ ,___ ,___ ,___ ,___
+   ,___ ,___ ,___ ,___ ,___ ,___
+   ,___ ,___ ,___ ,___ ,___ ,___ ,___
+
+   ,___ ,___ , LSHIFT(Key_Minus) ,___
+   ,___
+   ),
+  [_EMPTY] = KEYMAP_STACKED
+  (
+   ___ ,___ ,___ ,___ ,___ ,___ ,___
+   ,___ ,___ ,___ ,___ ,___ ,___ ,___
+   ,___ ,___ ,___ ,___ ,___ ,___
+   ,___ ,___ ,___ ,___ ,___ ,___ ,___
+   ,___ ,___ ,___ ,___
+   ,___
+
+   ,___ ,___ ,___ ,___ ,___ ,___ ,___
+   ,___ ,___ ,___ ,___ ,___ ,___ ,___
+   ,___ ,___ ,___ ,___ ,___ ,___
+   ,___ ,___ ,___ ,___ ,___ ,___ ,___
+
+   ,___ ,___ ,___ ,___
+   ,___
+   ),
 ) // KEYMAPS(
 
 /* Re-enable astyle's indent enforcement */
@@ -314,7 +349,8 @@ KALEIDOSCOPE_INIT_PLUGINS(
   ActiveModColorEffect,
   FocusSettingsCommand,
   FocusEEPROMCommand,
-  WavepoolEffect
+  WavepoolEffect,
+  BootAnimationEffect
 );
 
 /** The 'setup' function is one of the two standard Arduino sketch functions.
