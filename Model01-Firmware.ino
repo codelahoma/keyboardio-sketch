@@ -348,7 +348,6 @@ KALEIDOSCOPE_INIT_PLUGINS(
   // LEDDigitalRainEffect,
   EEPROMSettings,
   EEPROMKeymap,
-  ColormapEffect,
   OneShot,
   TapDance,
   EscapeOneShot,
