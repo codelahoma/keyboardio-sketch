@@ -24,6 +24,7 @@
 #include <Kaleidoscope-TapDance.h>
 #include <Kaleidoscope-LED-Wavepool.h>
 #include <Kaleidoscope-LEDEffect-BootAnimation.h>
+#include <Kaleidoscope-Heatmap.h>
 
 enum { MACRO_VERSION_INFO,
        MACRO_ANY
@@ -98,6 +99,13 @@ enum { PRIMARY, NUMPAD, FUNCTION, SNAKECASE, _EMPTY }; // layers
   * Then uncomment the line corresponding to the layout you want to use.
   *
   */
+
+static const cRGB heat_colors[] PROGMEM = {
+                                           {  0,   0,   0}, // black
+                                           {255,  25,  25}, // blue
+                                           { 25, 255,  25}, // green
+                                           { 25,  25, 255}  // red
+};
 
 #define PRIMARY_KEYMAP_QWERTY
 // #define PRIMARY_KEYMAP_COLEMAK
@@ -350,6 +358,7 @@ KALEIDOSCOPE_INIT_PLUGINS(
   FocusSettingsCommand,
   FocusEEPROMCommand,
   WavepoolEffect,
+  HeatmapEffect,
   BootAnimationEffect
 );
 
@@ -365,6 +374,9 @@ void setup() {
   // Qukeys.setReleaseDelay(25);
   // First, call Kaleidoscope's internal setup function
   Kaleidoscope.setup();
+
+  HeatmapEffect.heat_colors = heat_colors;
+  HeatmapEffect.heat_colors_length = 4;
 
   WavepoolEffect.idle_timeout = 5000;  // 5 seconds
   WavepoolEffect.activate();
