@@ -132,10 +132,10 @@ KEYMAPS(
    OSM(LeftControl), Key_Backspace, OSM(LeftGui), OSM(LeftShift),
    OSL(FUNCTION),
 
-   LockLayer(FUNCTION),  Key_6, Key_7, Key_8,     Key_9,         Key_0,         LockLayer(SNAKECASE),
+   Key_Escape,  Key_6, Key_7, Key_8,     Key_9,         Key_0,         LockLayer(SNAKECASE),
    Key_Enter,     Key_Y, Key_U, Key_I,     Key_O,         Key_P,         Key_Equals,
-                  Key_H, Key_J, Key_K,     Key_L,         TD(COLON), Key_Quote,
-   Key_Backspace,  Key_N, Key_M, Key_Comma, Key_Period,    Key_Slash,     Key_Minus,
+                  Key_H, Key_J, Key_K,     Key_L,         Key_Semicolon, Key_Quote,
+   Key_Tab,  Key_N, Key_M, Key_Comma, Key_Period,    Key_Slash,     Key_Minus,
    OSM(LeftShift), OSM(LeftAlt), Key_Spacebar, OSM(LeftControl),
    OSM(LeftGui)),
 
