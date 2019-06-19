@@ -25,6 +25,8 @@
 #include <Kaleidoscope-LED-Wavepool.h>
 #include <Kaleidoscope-LEDEffect-BootAnimation.h>
 #include <Kaleidoscope-Heatmap.h>
+#include <Kaleidoscope-MacrosOnTheFly.h>
+
 
 enum { MACRO_VERSION_INFO,
        MACRO_ANY
@@ -33,7 +35,9 @@ enum { MACRO_VERSION_INFO,
 // TapDance enums
 enum { LPBC,
        RPBC,
-       COLON
+       COLON,
+       PROGESC,
+       ENTER
      };
 
 /** The Model 01's key layouts are defined as 'keymaps'. By default, there are three
@@ -101,10 +105,14 @@ enum { PRIMARY, NUMPAD, FUNCTION, SNAKECASE, _EMPTY }; // layers
   */
 
 static const cRGB heat_colors[] PROGMEM = {
-                                           {  0,   0,   0}, // black
-                                           {255,  25,  25}, // blue
-                                           { 25, 255,  25}, // green
-                                           { 25,  25, 255}  // red
+                                           {0,0,0},
+                                           {145,0,63},
+                                           {206,18,86},
+                                           {231,41,138},
+                                           {223,101,176},
+                                           {201,148,199},
+                                           {212,185,218},
+                                           {231,225,239}
 };
 
 #define PRIMARY_KEYMAP_QWERTY
@@ -125,7 +133,7 @@ KEYMAPS(
 
 #if defined (PRIMARY_KEYMAP_QWERTY)
   [PRIMARY] = KEYMAP_STACKED
-  (___,          Key_1, Key_2, Key_3, Key_4, Key_5, Key_LEDEffectNext,
+  (TD(PROGESC),          Key_1, Key_2, Key_3, Key_4, Key_5, Key_LEDEffectNext,
    Key_Backtick, Key_Q, Key_W, Key_E, Key_R, Key_T, Key_Tab,
    Key_Magic,   Key_A, Key_S, Key_D, Key_F, Key_G,
    Key_MyHyper, Key_Z, Key_X, Key_C, Key_V, Key_B, Key_Escape,
@@ -133,7 +141,7 @@ KEYMAPS(
    OSL(FUNCTION),
 
    Key_Escape,  Key_6, Key_7, Key_8,     Key_9,         Key_0,         LockLayer(SNAKECASE),
-   Key_Enter,     Key_Y, Key_U, Key_I,     Key_O,         Key_P,         Key_Equals,
+   TD(ENTER),     Key_Y, Key_U, Key_I,     Key_O,         Key_P,         Key_Equals,
                   Key_H, Key_J, Key_K,     Key_L,         Key_Semicolon, Key_Quote,
    Key_Tab,  Key_N, Key_M, Key_Comma, Key_Period,    Key_Slash,     Key_Minus,
    OSM(LeftShift), OSM(LeftAlt), Key_Spacebar, OSM(LeftControl),
@@ -224,7 +232,7 @@ KEYMAPS(
    Consumer_PlaySlashPause,    Consumer_ScanNextTrack, Key_LeftCurlyBracket,     Key_RightCurlyBracket,    Key_LeftBracket, Key_RightBracket, Key_F12,
                                Key_LeftArrow,          Key_DownArrow,            Key_UpArrow,              Key_RightArrow,  ___,              ___,
    Key_PcApplication,          Consumer_ScanNextTrack,          Consumer_VolumeDecrement, Consumer_VolumeIncrement, ___,             Key_Backslash,    Key_Pipe,
-   ___, ___, Key_Enter, ___,
+   Key_MacroRec, Key_MacroPlay, Key_Enter, ___,
    ___),
   [SNAKECASE] = KEYMAP_STACKED
   (
@@ -336,6 +344,12 @@ void tapDanceAction(uint8_t tap_dance_index, byte row, byte col, uint8_t tap_cou
   case COLON:
     return tapDanceActionKeys(tap_count, tapDanceAction,
                           LSHIFT(Key_Semicolon), Key_Semicolon);
+  case PROGESC:
+    return tapDanceActionKeys(tap_count, tapDanceAction,
+                              Key_Escape, Key_NoKey);
+  case ENTER:
+    return tapDanceActionKeys(tap_count, tapDanceAction,
+                              Key_NoKey, Key_Enter);
   }
 }
 // First, tell Kaleidoscope which plugins you want to use.
@@ -345,20 +359,21 @@ KALEIDOSCOPE_INIT_PLUGINS(
   Focus,
   LEDControl,
   LEDOff,
-  // LEDDigitalRainEffect,
+  // // LEDDigitalRainEffect,
   EEPROMSettings,
   EEPROMKeymap,
   OneShot,
   TapDance,
-  EscapeOneShot,
+  // EscapeOneShot,
   Macros,
+  MacrosOnTheFly,
   MouseKeys,
   FocusSettingsCommand,
   FocusEEPROMCommand,
-  WavepoolEffect,
+  // WavepoolEffect,
   HeatmapEffect,
-  ActiveModColorEffect,
-  BootAnimationEffect
+  ActiveModColorEffect
+  // BootAnimationEffect
 );
 
 /** The 'setup' function is one of the two standard Arduino sketch functions.
@@ -375,10 +390,11 @@ void setup() {
   Kaleidoscope.setup();
 
   HeatmapEffect.heat_colors = heat_colors;
-  HeatmapEffect.heat_colors_length = 4;
+  HeatmapEffect.heat_colors_length = 8;
+  HeatmapEffect.activate();
 
-  WavepoolEffect.idle_timeout = 5000;  // 5 seconds
-  WavepoolEffect.activate();
+  // WavepoolEffect.idle_timeout = 5000;  // 5 seconds
+  // WavepoolEffect.activate();
   // LEDOff.activate();
 
   MouseWrapper.speedLimit = 64;
