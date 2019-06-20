@@ -9,12 +9,12 @@
 
 // The Kaleidoscope core
 #include "Kaleidoscope.h"
-
+#include <Kaleidoscope-Qukeys.h>
 #include "Kaleidoscope-Colormap.h"
 #include "Kaleidoscope-EEPROM-Keymap.h"
 #include "Kaleidoscope-EEPROM-Settings.h"
 #include <Kaleidoscope-OneShot.h>
-#include <Kaleidoscope-Escape-OneShot.h>
+// #include <Kaleidoscope-Escape-OneShot.h>
 #include "Kaleidoscope-FocusSerial.h"
 #include "Kaleidoscope-LEDControl.h"
 // #include "Kaleidoscope-LEDEffect-DigitalRain.h"
@@ -23,7 +23,7 @@
 #include <Kaleidoscope-LED-ActiveModColor.h>
 #include <Kaleidoscope-TapDance.h>
 #include <Kaleidoscope-LED-Wavepool.h>
-#include <Kaleidoscope-LEDEffect-BootAnimation.h>
+// #include <Kaleidoscope-LEDEffect-BootAnimation.h>
 #include <Kaleidoscope-Heatmap.h>
 #include <Kaleidoscope-MacrosOnTheFly.h>
 
@@ -88,7 +88,7 @@ enum { LPBC,
   *
   */
 
-enum { PRIMARY, NUMPAD, FUNCTION, SNAKECASE, _EMPTY }; // layers
+enum { PRIMARY,  FUNCTION, SNAKECASE, _EMPTY }; // layers
 
 
 /**
@@ -143,7 +143,7 @@ KEYMAPS(
    Key_Escape,  Key_6, Key_7, Key_8,     Key_9,         Key_0,         LockLayer(SNAKECASE),
    TD(ENTER),     Key_Y, Key_U, Key_I,     Key_O,         Key_P,         Key_Equals,
                   Key_H, Key_J, Key_K,     Key_L,         Key_Semicolon, Key_Quote,
-   Key_Tab,  Key_N, Key_M, Key_Comma, Key_Period,    Key_Slash,     Key_Minus,
+   LT(FUNCTION, Tab),  Key_N, Key_M, Key_Comma, Key_Period,    Key_Slash,     Key_Minus,
    OSM(LeftShift), OSM(LeftAlt), Key_Spacebar, OSM(LeftControl),
    OSM(LeftGui)),
 
@@ -203,22 +203,6 @@ KEYMAPS(
 #error "No default keymap defined. You should make sure that you have a line like '#define PRIMARY_KEYMAP_QWERTY' in your sketch"
 
 #endif
-
-
-  [NUMPAD] =  KEYMAP_STACKED
-  (___, ___, ___, ___, ___, ___, ___,
-   ___, ___, ___, ___, ___, ___, ___,
-   ___, ___, ___, ___, ___, ___,
-   ___, ___, ___, ___, ___, ___, ___,
-   ___, ___, ___, ___,
-   ___,
-
-   M(MACRO_VERSION_INFO),  ___, Key_7, Key_8,      Key_9,              Key_KeypadSubtract, ___,
-   ___,                    ___, Key_4, Key_5,      Key_6,              Key_KeypadAdd,      ___,
-                           ___, Key_1, Key_2,      Key_3,              Key_Equals,         ___,
-   ___,                    ___, Key_0, Key_Period, Key_KeypadMultiply, Key_KeypadDivide,   Key_Enter,
-   ___, ___, ___, ___,
-   ___),
 
   [FUNCTION] =  KEYMAP_STACKED
   (Key_mouseScrollUp,      Key_F1,           Key_F2,      Key_F3,     Key_F4,        Key_F5,           LCTRL(Key_F1),
@@ -356,21 +340,22 @@ void tapDanceAction(uint8_t tap_dance_index, byte row, byte col, uint8_t tap_cou
 // The order can be important. For example, LED effects are
 // added in the order they're listed here.
 KALEIDOSCOPE_INIT_PLUGINS(
-  Focus,
+  // Focus,
   LEDControl,
   LEDOff,
   // // LEDDigitalRainEffect,
   EEPROMSettings,
   EEPROMKeymap,
+  Qukeys,
   OneShot,
   TapDance,
   // EscapeOneShot,
   Macros,
   MacrosOnTheFly,
   MouseKeys,
-  FocusSettingsCommand,
-  FocusEEPROMCommand,
-  // WavepoolEffect,
+  // FocusSettingsCommand,
+  // FocusEEPROMCommand,
+  WavepoolEffect,
   HeatmapEffect,
   ActiveModColorEffect
   // BootAnimationEffect
@@ -391,11 +376,9 @@ void setup() {
 
   HeatmapEffect.heat_colors = heat_colors;
   HeatmapEffect.heat_colors_length = 8;
-  HeatmapEffect.activate();
 
-  // WavepoolEffect.idle_timeout = 5000;  // 5 seconds
-  // WavepoolEffect.activate();
-  // LEDOff.activate();
+  WavepoolEffect.idle_timeout = 5000;  // 5 seconds
+  WavepoolEffect.activate();
 
   MouseWrapper.speedLimit = 64;
   MouseKeys.speed = 10;
