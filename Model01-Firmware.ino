@@ -9,7 +9,7 @@
 
 // The Kaleidoscope core
 #include "Kaleidoscope.h"
-#include <Kaleidoscope-Qukeys.h>
+// #include <Kaleidoscope-Qukeys.h>
 #include "Kaleidoscope-Colormap.h"
 #include "Kaleidoscope-EEPROM-Keymap.h"
 #include "Kaleidoscope-EEPROM-Settings.h"
@@ -25,7 +25,7 @@
 #include <Kaleidoscope-LED-Wavepool.h>
 // #include <Kaleidoscope-LEDEffect-BootAnimation.h>
 #include <Kaleidoscope-Heatmap.h>
-#include <Kaleidoscope-MacrosOnTheFly.h>
+// #include <Kaleidoscope-MacrosOnTheFly.h>
 
 
 enum { MACRO_VERSION_INFO,
@@ -140,10 +140,10 @@ KEYMAPS(
    OSM(LeftControl), Key_Backspace, OSM(LeftGui), OSM(LeftShift),
    OSL(FUNCTION),
 
-   Key_Escape,  Key_6, Key_7, Key_8,     Key_9,         Key_0,         LockLayer(SNAKECASE),
-   TD(ENTER),     Key_Y, Key_U, Key_I,     Key_O,         Key_P,         Key_Equals,
+   LSHIFT(LALT(Key_Enter)),  Key_6, Key_7, Key_8, Key_9, Key_0, LockLayer(SNAKECASE),
+   Key_Enter,     Key_Y, Key_U, Key_I,     Key_O,         Key_P,         Key_Equals,
                   Key_H, Key_J, Key_K,     Key_L,         Key_Semicolon, Key_Quote,
-   LT(FUNCTION, Tab),  Key_N, Key_M, Key_Comma, Key_Period,    Key_Slash,     Key_Minus,
+   OSL(FUNCTION),  Key_N, Key_M, Key_Comma, Key_Period,    Key_Slash,     Key_Minus,
    OSM(LeftShift), OSM(LeftAlt), Key_Spacebar, OSM(LeftControl),
    OSM(LeftGui)),
 
@@ -209,14 +209,14 @@ KEYMAPS(
    Key_mouseScrollDn,  ___,              Key_mouseUp, ___,        Key_mouseBtnR, Key_mouseWarpEnd, Key_mouseWarpNE,
    Key_Home, Key_mouseL,       Key_mouseDn, Key_mouseR, Key_mouseBtnL, Key_mouseWarpNW,
    Key_End,  Key_PrintScreen,  Key_Insert,  ___,        Key_mouseBtnM, Key_mouseWarpSW,  Key_mouseWarpSE,
-   ___, Key_Delete, Key_PageDown, ___,
+   ___, Key_Delete, Key_PageUp, Key_PageDown,
    ___,
 
    Consumer_ScanPreviousTrack, Key_F6,                 Key_F7,                   Key_F8,                   Key_F9,          Key_F10,          Key_F11,
    Consumer_PlaySlashPause,    Consumer_ScanNextTrack, Key_LeftCurlyBracket,     Key_RightCurlyBracket,    Key_LeftBracket, Key_RightBracket, Key_F12,
                                Key_LeftArrow,          Key_DownArrow,            Key_UpArrow,              Key_RightArrow,  ___,              ___,
    Key_PcApplication,          Consumer_ScanNextTrack,          Consumer_VolumeDecrement, Consumer_VolumeIncrement, ___,             Key_Backslash,    Key_Pipe,
-   Key_MacroRec, Key_MacroPlay, Key_Enter, ___,
+   ___, ___, Key_Enter, ___,
    ___),
   [SNAKECASE] = KEYMAP_STACKED
   (
@@ -321,10 +321,10 @@ void tapDanceAction(uint8_t tap_dance_index, byte row, byte col, uint8_t tap_cou
   switch (tap_dance_index) {
   case LPBC:
     return tapDanceActionKeys(tap_count, tapDanceAction,
-                              Key_LeftParen, Key_LeftBracket, Key_LeftCurlyBracket );
+                              Key_9, Key_LeftBracket);
   case RPBC:
     return tapDanceActionKeys(tap_count, tapDanceAction,
-                              Key_RightParen, Key_RightBracket, Key_RightCurlyBracket );
+                              Key_0, Key_RightBracket);
   case COLON:
     return tapDanceActionKeys(tap_count, tapDanceAction,
                           LSHIFT(Key_Semicolon), Key_Semicolon);
@@ -336,6 +336,7 @@ void tapDanceAction(uint8_t tap_dance_index, byte row, byte col, uint8_t tap_cou
                               Key_NoKey, Key_Enter);
   }
 }
+
 // First, tell Kaleidoscope which plugins you want to use.
 // The order can be important. For example, LED effects are
 // added in the order they're listed here.
@@ -346,12 +347,12 @@ KALEIDOSCOPE_INIT_PLUGINS(
   // // LEDDigitalRainEffect,
   EEPROMSettings,
   EEPROMKeymap,
-  Qukeys,
+  // Qukeys,
   OneShot,
   TapDance,
   // EscapeOneShot,
   Macros,
-  MacrosOnTheFly,
+  // MacrosOnTheFly,
   MouseKeys,
   // FocusSettingsCommand,
   // FocusEEPROMCommand,
