@@ -8,7 +8,7 @@
 
 
 // The Kaleidoscope core
-#include "Kaleidoscope.h"
+#include <Kaleidoscope.h>
 // #include <Kaleidoscope-Qukeys.h>
 #include "Kaleidoscope-Colormap.h"
 #include "Kaleidoscope-EEPROM-Keymap.h"
@@ -25,7 +25,7 @@
 #include <Kaleidoscope-LED-Wavepool.h>
 // #include <Kaleidoscope-LEDEffect-BootAnimation.h>
 #include <Kaleidoscope-Heatmap.h>
-// #include <Kaleidoscope-MacrosOnTheFly.h>
+#include <Kaleidoscope-MacrosOnTheFly.h>
 
 
 enum { MACRO_VERSION_INFO,
@@ -216,7 +216,7 @@ KEYMAPS(
    Consumer_PlaySlashPause,    Consumer_ScanNextTrack, Key_LeftCurlyBracket,     Key_RightCurlyBracket,    Key_LeftBracket, Key_RightBracket, Key_F12,
                                Key_LeftArrow,          Key_DownArrow,            Key_UpArrow,              Key_RightArrow,  ___,              ___,
    Key_PcApplication,          Consumer_ScanNextTrack,          Consumer_VolumeDecrement, Consumer_VolumeIncrement, ___,             Key_Backslash,    Key_Pipe,
-   ___, ___, Key_Enter, ___,
+   Key_MacroRec, Key_MacroPlay, Key_Enter, ___,
    ___),
   [SNAKECASE] = KEYMAP_STACKED
   (
@@ -277,17 +277,17 @@ static void versionInfoMacro(uint8_t keyState) {
  *
  */
 
-static void anyKeyMacro(uint8_t keyState) {
-  static Key lastKey;
-  bool toggledOn = false;
-  if (keyToggledOn(keyState)) {
-    lastKey.keyCode = Key_A.keyCode + (uint8_t)(millis() % 36);
-    toggledOn = true;
-  }
+// static void anyKeyMacro(uint8_t keyState) {
+//   static Key lastKey;
+//   bool toggledOn = false;
+//   if (keyToggledOn(keyState)) {
+//     lastKey.setKeyCode(Key_A.getKeyCode() + (uint8_t)(millis() % 36));
+//     toggledOn = true;
+//   }
 
-  if (keyIsPressed(keyState))
-    kaleidoscope::hid::pressKey(lastKey, toggledOn);
-}
+//   if (keyIsPressed(keyState))
+//     kaleidoscope::hid::pressKey(lastKey, toggledOn);
+// }
 
 
 /** macroAction dispatches keymap events that are tied to a macro
@@ -309,9 +309,9 @@ const macro_t *macroAction(uint8_t macroIndex, uint8_t keyState) {
     versionInfoMacro(keyState);
     break;
 
-  case MACRO_ANY:
-    anyKeyMacro(keyState);
-    break;
+  // case MACRO_ANY:
+  //   anyKeyMacro(keyState);
+  //   break;
   }
   return MACRO_NONE;
 }
@@ -352,7 +352,7 @@ KALEIDOSCOPE_INIT_PLUGINS(
   TapDance,
   // EscapeOneShot,
   Macros,
-  // MacrosOnTheFly,
+  MacrosOnTheFly,
   MouseKeys,
   // FocusSettingsCommand,
   // FocusEEPROMCommand,
