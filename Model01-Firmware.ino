@@ -8,24 +8,55 @@
 
 
 // The Kaleidoscope core
-#include <Kaleidoscope.h>
-// #include <Kaleidoscope-Qukeys.h>
-#include "Kaleidoscope-Colormap.h"
-#include "Kaleidoscope-EEPROM-Keymap.h"
+#include "Kaleidoscope.h"
+
+// Support for storing the keymap in EEPROM
 #include "Kaleidoscope-EEPROM-Settings.h"
+#include "Kaleidoscope-EEPROM-Keymap.h"
+
+// Support for communicating with the host via a simple Serial protocol
+#include "Kaleidoscope-FocusSerial.h"
+
 #include <Kaleidoscope-OneShot.h>
 // #include <Kaleidoscope-Escape-OneShot.h>
-#include "Kaleidoscope-FocusSerial.h"
-#include "Kaleidoscope-LEDControl.h"
-// #include "Kaleidoscope-LEDEffect-DigitalRain.h"
-#include "Kaleidoscope-Macros.h"
+
+// Support for keys that move the mouse
 #include "Kaleidoscope-MouseKeys.h"
+
+// Support for macros
+#include "Kaleidoscope-Macros.h"
+
+// Support for controlling the keyboard's LEDs
+#include "Kaleidoscope-LEDControl.h"
+
+#include <Kaleidoscope-IdleLEDs.h>
+
+// Support for an LED mode that makes all the LEDs 'breathe'
+// #include "Kaleidoscope-LEDEffect-Breathe.h"
+
+// Support for an LED mode that makes a red pixel chase a blue pixel across the keyboard
+// #include "Kaleidoscope-LEDEffect-Chase.h"
+
+// Support for LED modes that pulse the keyboard's LED in a rainbow pattern
+// #include "Kaleidoscope-LEDEffect-Rainbow.h"
+
+// Support for an LED mode that prints the keys you press in letters 4px high
+#include "Kaleidoscope-LED-AlphaSquare.h"
+
+// // Support for shared palettes for other plugins, like Colormap below
+// #include "Kaleidoscope-LED-Palette-Theme.h"
+
+// // Support for an LED mode that lets one configure per-layer color maps
+// #include "Kaleidoscope-Colormap.h"
+
+
+
 #include <Kaleidoscope-LED-ActiveModColor.h>
 #include <Kaleidoscope-TapDance.h>
 #include <Kaleidoscope-LED-Wavepool.h>
 // #include <Kaleidoscope-LEDEffect-BootAnimation.h>
 #include <Kaleidoscope-Heatmap.h>
-#include <Kaleidoscope-MacrosOnTheFly.h>
+// #include <Kaleidoscope-MacrosOnTheFly.h>
 
 
 enum { MACRO_VERSION_INFO,
@@ -51,10 +82,10 @@ enum { LPBC,
   * defined as part of the USB HID Keyboard specification. You can find the names
   * (if not yet the explanations) for all the standard `Key_` defintions offered by
   * Kaleidoscope in these files:
-  *    https://github.com/keyboardio/Kaleidoscope/blob/master/src/key_defs_keyboard.h
-  *    https://github.com/keyboardio/Kaleidoscope/blob/master/src/key_defs_consumerctl.h
-  *    https://github.com/keyboardio/Kaleidoscope/blob/master/src/key_defs_sysctl.h
-  *    https://github.com/keyboardio/Kaleidoscope/blob/master/src/key_defs_keymaps.h
+  *    https://github.com/keyboardio/Kaleidoscope/blob/master/src/kaleidoscope/key_defs_keyboard.h
+  *    https://github.com/keyboardio/Kaleidoscope/blob/master/src/kaleidoscope/key_defs_consumerctl.h
+  *    https://github.com/keyboardio/Kaleidoscope/blob/master/src/kaleidoscope/key_defs_sysctl.h
+  *    https://github.com/keyboardio/Kaleidoscope/blob/master/src/kaleidoscope/key_defs_keymaps.h
   *
   * Additional things that should be documented here include
   *   using ___ to let keypresses fall through to the previously active layer
@@ -128,6 +159,9 @@ static const cRGB heat_colors[] PROGMEM = {
 // *INDENT-OFF*
 #define Key_MyHyper LCTRL(LALT(LSHIFT(Key_LeftGui)))
 #define Key_Magic LCTRL(LALT(Key_LeftGui))
+#define Key_AmethystMainWindow LSHIFT(LALT(Key_Enter))
+#define Key_AmethystRotateClockwise LCTRL(LSHIFT(LALT(Key_J)))
+#define Key_AmethystRotateCounterClockwise LCTRL(LSHIFT(LALT(Key_J)))
 
 KEYMAPS(
 
@@ -140,12 +174,12 @@ KEYMAPS(
    OSM(LeftControl), Key_Backspace, OSM(LeftGui), OSM(LeftShift),
    OSL(FUNCTION),
 
-   LSHIFT(LALT(Key_Enter)),  Key_6, Key_7, Key_8, Key_9, Key_0, LockLayer(SNAKECASE),
+   Key_AmethystMainWindow,  Key_6, Key_7, Key_8, Key_9, Key_0, LockLayer(SNAKECASE),
    Key_Enter,     Key_Y, Key_U, Key_I,     Key_O,         Key_P,         Key_Equals,
                   Key_H, Key_J, Key_K,     Key_L,         Key_Semicolon, Key_Quote,
-   OSL(FUNCTION),  Key_N, Key_M, Key_Comma, Key_Period,    Key_Slash,     Key_Minus,
+   Key_Tab,  Key_N, Key_M, Key_Comma, Key_Period,    Key_Slash,     Key_Minus,
    OSM(LeftShift), OSM(LeftAlt), Key_Spacebar, OSM(LeftControl),
-   OSM(LeftGui)),
+   OSL(FUNCTION)),
 
 #elif defined (PRIMARY_KEYMAP_DVORAK)
 
@@ -215,8 +249,8 @@ KEYMAPS(
    Consumer_ScanPreviousTrack, Key_F6,                 Key_F7,                   Key_F8,                   Key_F9,          Key_F10,          Key_F11,
    Consumer_PlaySlashPause,    Consumer_ScanNextTrack, Key_LeftCurlyBracket,     Key_RightCurlyBracket,    Key_LeftBracket, Key_RightBracket, Key_F12,
                                Key_LeftArrow,          Key_DownArrow,            Key_UpArrow,              Key_RightArrow,  ___,              ___,
-   Key_PcApplication,          Consumer_ScanNextTrack,          Consumer_VolumeDecrement, Consumer_VolumeIncrement, ___,             Key_Backslash,    Key_Pipe,
-   Key_MacroRec, Key_MacroPlay, Key_Enter, ___,
+   Key_PcApplication,          Key_PageDown,           Key_PageUp, Key_AmethystRotateClockwise, Key_AmethystRotateCounterClockwise,             Key_Backslash,    Key_Pipe,
+   ___, ___, Key_Enter, ___,
    ___),
   [SNAKECASE] = KEYMAP_STACKED
   (
@@ -341,10 +375,15 @@ void tapDanceAction(uint8_t tap_dance_index, byte row, byte col, uint8_t tap_cou
 // The order can be important. For example, LED effects are
 // added in the order they're listed here.
 KALEIDOSCOPE_INIT_PLUGINS(
-  // Focus,
+  Focus,
+  FocusSettingsCommand,
+  FocusEEPROMCommand,
   LEDControl,
   LEDOff,
-  // // LEDDigitalRainEffect,
+  WavepoolEffect,
+  HeatmapEffect,
+  AlphaSquareEffect,
+  // LEDBreatheEffect,
   EEPROMSettings,
   EEPROMKeymap,
   // Qukeys,
@@ -352,12 +391,8 @@ KALEIDOSCOPE_INIT_PLUGINS(
   TapDance,
   // EscapeOneShot,
   Macros,
-  MacrosOnTheFly,
+  // MacrosOnTheFly,
   MouseKeys,
-  // FocusSettingsCommand,
-  // FocusEEPROMCommand,
-  WavepoolEffect,
-  HeatmapEffect,
   ActiveModColorEffect
   // BootAnimationEffect
 );
@@ -375,6 +410,8 @@ void setup() {
   // First, call Kaleidoscope's internal setup function
   Kaleidoscope.setup();
 
+  AlphaSquare.color = {0xcb, 0xc0, 0xff};
+
   HeatmapEffect.heat_colors = heat_colors;
   HeatmapEffect.heat_colors_length = 8;
 
@@ -384,6 +421,9 @@ void setup() {
   MouseWrapper.speedLimit = 64;
   MouseKeys.speed = 10;
   MouseKeys.accelDelay = 35;
+
+
+  LEDOff.activate();
   // To make the keymap editable without flashing new firmware, we store
   // additional layers in EEPROM. For now, we reserve space for five layers. If
   // one wants to use these layers, just set the default layer to one in EEPROM,
@@ -391,10 +431,10 @@ void setup() {
   // `keymap.onlyCustom` command to use EEPROM layers only.
   EEPROMKeymap.setup(5);
 
-  // We need to tell the Colormap plugin how many layers we want to have custom
-  // maps for. To make things simple, we set it to five layers, which is how
-  // many editable layers we have (see above).
-  ColormapEffect.max_layers(5);
+  // // We need to tell the Colormap plugin how many layers we want to have custom
+  // // maps for. To make things simple, we set it to five layers, which is how
+  // // many editable layers we have (see above).
+  // ColormapEffect.max_layers(5);
 }
 
 /** loop is the second of the standard Arduino sketch functions.
