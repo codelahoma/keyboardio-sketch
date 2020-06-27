@@ -171,13 +171,13 @@ KEYMAPS(
    Key_Backtick, Key_Q, Key_W, Key_E, Key_R, Key_T, Key_Tab,
    Key_Magic,   Key_A, Key_S, Key_D, Key_F, Key_G,
    Key_MyHyper, Key_Z, Key_X, Key_C, Key_V, Key_B, Key_Escape,
-   OSM(LeftControl), Key_Backspace, OSM(LeftGui), OSM(LeftShift),
+   Key_Escape, Key_Backspace, OSM(LeftGui), OSM(LeftShift),
    OSL(FUNCTION),
 
-   Key_AmethystMainWindow,  Key_6, Key_7, Key_8, Key_9, Key_0, LockLayer(SNAKECASE),
+   Key_AmethystMainWindow,  Key_6, Key_7, Key_8, Key_9, Key_0, LGUI(Key_Backtick),
    Key_Enter,     Key_Y, Key_U, Key_I,     Key_O,         Key_P,         Key_Equals,
                   Key_H, Key_J, Key_K,     Key_L,         Key_Semicolon, Key_Quote,
-   Key_Tab,  Key_N, Key_M, Key_Comma, Key_Period,    Key_Slash,     Key_Minus,
+   OSL(FUNCTION),  Key_N, Key_M, Key_Comma, Key_Period,    Key_Slash,     Key_Minus,
    OSM(LeftShift), OSM(LeftAlt), Key_Spacebar, OSM(LeftControl),
    OSL(FUNCTION)),
 
@@ -402,13 +402,12 @@ KALEIDOSCOPE_INIT_PLUGINS(
  * Kaleidoscope and any plugins.
  */
 void setup() {
-  // QUKEYS(
-  //        kaleidoscope::plugin::Qukey(0, 3, 0, Key_LeftControl)
-  //        );
-  // Qukeys.setTimeout(200);
-  // Qukeys.setReleaseDelay(25);
-  // First, call Kaleidoscope's internal setup function
   Kaleidoscope.setup();
+  QUKEYS(
+         kaleidoscope::plugin::Qukey(0, KeyAddr(0, 7), Key_LeftControl)
+         );
+  Qukeys.setHoldTimeout(200);
+  Qukeys.setOverlapThreshold(25);
 
   AlphaSquare.color = {0xcb, 0xc0, 0xff};
 
