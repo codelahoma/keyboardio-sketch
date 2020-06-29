@@ -32,13 +32,13 @@
 #include <Kaleidoscope-IdleLEDs.h>
 
 // Support for an LED mode that makes all the LEDs 'breathe'
-// #include "Kaleidoscope-LEDEffect-Breathe.h"
+#include "Kaleidoscope-LEDEffect-Breathe.h"
 
 // Support for an LED mode that makes a red pixel chase a blue pixel across the keyboard
-// #include "Kaleidoscope-LEDEffect-Chase.h"
+#include "Kaleidoscope-LEDEffect-Chase.h"
 
 // Support for LED modes that pulse the keyboard's LED in a rainbow pattern
-// #include "Kaleidoscope-LEDEffect-Rainbow.h"
+#include "Kaleidoscope-LEDEffect-Rainbow.h"
 
 // Support for an LED mode that prints the keys you press in letters 4px high
 // #include "Kaleidoscope-LED-AlphaSquare.h"
@@ -335,7 +335,10 @@ KALEIDOSCOPE_INIT_PLUGINS(
   WavepoolEffect,
   HeatmapEffect,
   // AlphaSquareEffect,
-  // LEDBreatheEffect,
+  LEDBreatheEffect,
+  // LEDEffect-Chase,
+  LEDRainbowEffect,
+  LEDRainbowWaveEffect,
   // EEPROMSettings,
   // EEPROMKeymap,
   OneShot,
@@ -361,6 +364,9 @@ void setup() {
   // First, call Kaleidoscope's internal setup function
 
   // AlphaSquare.color = {0xcb, 0xc0, 0xff};
+  LEDRainbowEffect.brightness(150);
+  LEDRainbowWaveEffect.brightness(150);
+  LEDRainbowWaveEffect.update_delay(50);
 
   HeatmapEffect.heat_colors = heat_colors;
   HeatmapEffect.heat_colors_length = 8;
