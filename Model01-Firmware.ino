@@ -57,7 +57,7 @@
 #include <Kaleidoscope-LED-Wavepool.h>
 #include <Kaleidoscope-LEDEffect-BootAnimation.h>
 #include <Kaleidoscope-Heatmap.h>
-#include <Kaleidoscope-MacrosOnTheFly.h>
+// #include <Kaleidoscope-MacrosOnTheFly.h>
 
 
 enum { MACRO_VERSION_INFO,
@@ -189,14 +189,14 @@ KEYMAPS(
 #endif
 
   [FUNCTION] =  KEYMAP_STACKED
-  (Key_mouseScrollUp,      Key_F1,           Key_F2,      Key_F3,     Key_F4,        Key_F5,           Key_MacroRec,
+  (Key_mouseScrollUp,      Key_F1,           Key_F2,      Key_F3,     Key_F4,        Key_F5,           Key_PageUp,
    Key_mouseScrollDn,  ___,              Key_mouseUp, ___,        Key_mouseBtnR, Key_mouseWarpEnd, Key_mouseWarpNE,
    Key_Home, Key_mouseL,       Key_mouseDn, Key_mouseR, Key_mouseBtnL, Key_mouseWarpNW,
    Key_End,  Key_PrintScreen,  Key_Insert,  ___,        Key_mouseBtnM, Key_mouseWarpSW,  Key_mouseWarpSE,
    ___, Key_Delete, Key_PageUp, Key_PageDown,
    ___,
 
-   Key_MacroPlay, Key_F6,                 Key_F7,                   Key_F8,                   Key_F9,          Key_F10,          Key_F11,
+   Key_PageDown, Key_F6,                 Key_F7,                   Key_F8,                   Key_F9,          Key_F10,          Key_F11,
    Consumer_PlaySlashPause,    Consumer_ScanNextTrack, Key_LeftCurlyBracket,     Key_RightCurlyBracket,    Key_LeftBracket, Key_RightBracket, Key_F12,
                                Key_LeftArrow,          Key_DownArrow,            Key_UpArrow,              Key_RightArrow,  ___,              ___,
    Key_PcApplication,          Key_PageDown,           Key_PageUp, Consumer_VolumeDecrement, Consumer_VolumeIncrement,             Key_Backslash,    Key_Pipe,
@@ -342,7 +342,7 @@ KALEIDOSCOPE_INIT_PLUGINS(
   TapDance,
   // EscapeOneShot,
   Macros,
-  MacrosOnTheFly,
+  // MacrosOnTheFly,
   MouseKeys,
   ActiveModColorEffect
 );
