@@ -202,23 +202,6 @@ KEYMAPS(
    Key_PcApplication,          Key_PageDown,           Key_PageUp, Consumer_VolumeDecrement, Consumer_VolumeIncrement,             Key_Backslash,    Key_Pipe,
    ___, ___, Key_Enter, ___,
    ___),
-  [SNAKECASE] = KEYMAP_STACKED
-  (
-   ___ ,___ ,___ ,___ ,___ ,___ ,___
-   ,___ ,___ ,___ ,___ ,___ ,___ ,___
-   ,___ ,___ ,___ ,___ ,___ ,___
-   ,___ ,___ ,___ ,___ ,___ ,___ ,___
-   ,___ ,___ ,___ ,___
-   ,___
-
-   ,___ ,___ ,___ ,___ ,___ ,___ ,___
-   ,___ ,___ ,___ ,___ ,___ ,___ ,___
-   ,___ ,___ ,___ ,___ ,___ ,___
-   ,___ ,___ ,___ ,___ ,___ ,___ ,___
-
-   ,___ ,___ , LSHIFT(Key_Minus) ,___
-   ,___
-   ),
   [_EMPTY] = KEYMAP_STACKED
   (
    ___ ,___ ,___ ,___ ,___ ,___ ,___
