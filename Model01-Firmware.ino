@@ -342,7 +342,8 @@ void setup() {
   QUKEYS(
          kaleidoscope::plugin::Qukey(0, KeyAddr(0, 7), Key_LeftControl),
          kaleidoscope::plugin::Qukey(0, KeyAddr(2, 0), Key_Magic),
-         kaleidoscope::plugin::Qukey(0, KeyAddr(3, 0), Key_MyHyper)
+         kaleidoscope::plugin::Qukey(0, KeyAddr(3, 0), Key_MyHyper),
+         kaleidoscope::plugin::Qukey(0, KeyAddr(3, 9), ShiftToLayer(FUNCTION))
          );
   Qukeys.setHoldTimeout(200);
   Qukeys.setOverlapThreshold(25);
