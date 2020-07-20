@@ -120,7 +120,7 @@ enum { LPBC,
   *
   */
 
-enum { PRIMARY,  FUNCTION, SNAKECASE, _EMPTY }; // layers
+enum { PRIMARY,  FUNCTION, _EMPTY }; // layers
 
 
 /**
