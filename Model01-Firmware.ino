@@ -18,7 +18,7 @@
 #include "Kaleidoscope-FocusSerial.h"
 
 #include <Kaleidoscope-OneShot.h>
-// #include <Kaleidoscope-Escape-OneShot.h>
+#include <Kaleidoscope-Escape-OneShot.h>
 
 // Support for keys that move the mouse
 #include "Kaleidoscope-MouseKeys.h"
@@ -326,7 +326,7 @@ KALEIDOSCOPE_INIT_PLUGINS(
   // EEPROMKeymap,
   OneShot,
   TapDance,
-  // EscapeOneShot,
+  EscapeOneShot,
   Macros,
   // MacrosOnTheFly,
   MouseKeys,
