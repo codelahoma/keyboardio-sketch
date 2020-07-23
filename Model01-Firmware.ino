@@ -173,14 +173,14 @@ KEYMAPS(
    Key_PageUp,   Key_A, Key_S, Key_D, Key_F, Key_G,
    Key_PageDown, Key_Z, Key_X, Key_C, Key_V, Key_B, Key_Escape,
    Key_Escape, Key_Backspace, OSM(LeftGui), OSM(LeftShift),
-   OSL(FUNCTION),
+   OSM(LeftGui),
 
    Key_AmethystMainWindow,  Key_6, Key_7, Key_8, Key_9, Key_0, LGUI(Key_Backtick),
    Key_Enter,     Key_Y, Key_U, Key_I,     Key_O,         Key_P,         Key_Equals,
                   Key_H, Key_J, Key_K,     Key_L,         Key_Semicolon, Key_Quote,
-   OSL(FUNCTION),  Key_N, Key_M, Key_Comma, Key_Period,    Key_Slash,     Key_Minus,
+   Key_Tab,  Key_N, Key_M, Key_Comma, Key_Period,    Key_Slash,     Key_Minus,
    OSM(LeftShift), OSM(LeftAlt), Key_Spacebar, OSM(LeftControl),
-   OSM(LeftGui)),
+   OSL(FUNCTION)),
 
 #else
 
@@ -343,7 +343,8 @@ void setup() {
          kaleidoscope::plugin::Qukey(0, KeyAddr(0, 7), Key_LeftControl),
          kaleidoscope::plugin::Qukey(0, KeyAddr(2, 0), Key_Magic),
          kaleidoscope::plugin::Qukey(0, KeyAddr(3, 0), Key_MyHyper),
-         kaleidoscope::plugin::Qukey(0, KeyAddr(3, 9), ShiftToLayer(FUNCTION))
+         kaleidoscope::plugin::Qukey(0, KeyAddr(3, 6), ShiftToLayer(FUNCTION)),
+         kaleidoscope::plugin::Qukey(0, KeyAddr(3, 9), Key_LeftGui)
          );
   Qukeys.setHoldTimeout(200);
   Qukeys.setOverlapThreshold(25);
