@@ -162,7 +162,7 @@ static const cRGB heat_colors[] PROGMEM = {
 #define Key_Magic LCTRL(LALT(Key_LeftGui))
 #define Key_AmethystMainWindow LSHIFT(LALT(Key_Enter))
 #define Key_AmethystRotateClockwise LCTRL(LSHIFT(LALT(Key_J)))
-#define Key_AmethystRotateCounterClockwise LCTRL(LSHIFT(LALT(Key_J)))
+#define Key_AmethystRotateCounterClockwise LCTRL(LSHIFT(LALT(Key_K)))
 
 KEYMAPS(
 
@@ -196,9 +196,9 @@ KEYMAPS(
    ___, Key_Delete, Key_PageUp, Key_PageDown,
    ___,
 
-   Key_PageDown, Key_F6,                 Key_F7,                   Key_F8,                   Key_F9,          Key_F10,          Key_F11,
+   Key_AmethystRotateClockwise, Key_F6,                 Key_F7,                   Key_F8,                   Key_F9,          Key_F10,          Key_F11,
    Consumer_PlaySlashPause,    Consumer_ScanNextTrack, Key_LeftCurlyBracket,     Key_RightCurlyBracket,    Key_LeftBracket, Key_RightBracket, Key_F12,
-                               Key_LeftArrow,          Key_DownArrow,            Key_UpArrow,              Key_RightArrow,  ___,              ___,
+                               Key_LeftArrow,          Key_DownArrow,            Key_UpArrow,              Key_RightArrow,  Key_AmethystRotateCounterClockwise,              ___,
    Key_PcApplication,          Key_PageDown,           Key_PageUp, Consumer_VolumeDecrement, Consumer_VolumeIncrement,             Key_Backslash,    Key_Pipe,
    ___, ___, Key_Enter, ___,
    ___),
