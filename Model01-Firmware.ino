@@ -347,7 +347,7 @@ void setup() {
          kaleidoscope::plugin::Qukey(0, KeyAddr(3, 9), Key_LeftGui)
          );
   Qukeys.setHoldTimeout(200);
-  Qukeys.setOverlapThreshold(25);
+  Qukeys.setOverlapThreshold(75);
   // First, call Kaleidoscope's internal setup function
 
   // AlphaSquare.color = {0xcb, 0xc0, 0xff};
