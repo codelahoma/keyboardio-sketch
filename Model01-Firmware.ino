@@ -175,7 +175,7 @@ KEYMAPS(
    Key_Escape, Key_Backspace, OSM(LeftGui), OSM(LeftShift),
    OSM(LeftGui),
 
-   Key_AmethystMainWindow,  Key_6, Key_7, Key_8, Key_9, Key_0, LGUI(Key_Backtick),
+   LCTRL(Key_C),  Key_6, Key_7, Key_8, Key_9, Key_0, LGUI(Key_Backtick),
    Key_Enter,     Key_Y, Key_U, Key_I,     Key_O,         Key_P,         Key_Equals,
                   Key_H, Key_J, Key_K,     Key_L,         Key_Semicolon, Key_Quote,
    Key_Tab,  Key_N, Key_M, Key_Comma, Key_Period,    Key_Slash,     Key_Minus,
@@ -196,7 +196,7 @@ KEYMAPS(
    ___, Key_Delete, Key_PageUp, Key_PageDown,
    ___,
 
-   Key_AmethystRotateClockwise, Key_F6,                 Key_F7,                   Key_F8,                   Key_F9,          Key_F10,          Key_F11,
+   LCTRL(Key_X), Key_F6,                 Key_F7,                   Key_F8,                   Key_F9,          Key_F10,          Key_F11,
    Consumer_PlaySlashPause,    Consumer_ScanNextTrack, Key_LeftCurlyBracket,     Key_RightCurlyBracket,    Key_LeftBracket, Key_RightBracket, Key_F12,
                                Key_LeftArrow,          Key_DownArrow,            Key_UpArrow,              Key_RightArrow,  Key_AmethystRotateCounterClockwise,              ___,
    Key_PcApplication,          Key_PageDown,           Key_PageUp, Consumer_VolumeDecrement, Consumer_VolumeIncrement,             Key_Backslash,    Key_Pipe,
