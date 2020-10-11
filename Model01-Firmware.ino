@@ -18,7 +18,7 @@
 #include "Kaleidoscope-FocusSerial.h"
 
 #include <Kaleidoscope-OneShot.h>
-#include <Kaleidoscope-Escape-OneShot.h>
+// #include <Kaleidoscope-Escape-OneShot.h>
 
 // Support for keys that move the mouse
 #include "Kaleidoscope-MouseKeys.h"
@@ -160,9 +160,10 @@ static const cRGB heat_colors[] PROGMEM = {
 // *INDENT-OFF*
 #define Key_MyHyper LCTRL(LALT(LSHIFT(Key_LeftGui)))
 #define Key_Magic LCTRL(LALT(Key_LeftGui))
+#define Key_CommandShift LSHIFT(Key_LeftGui)
 #define Key_AmethystMainWindow LSHIFT(LALT(Key_Enter))
 #define Key_AmethystRotateClockwise LCTRL(LSHIFT(LALT(Key_J)))
-#define Key_AmethystRotateCounterClockwise LCTRL(LSHIFT(LALT(Key_K)))
+#define Key_AmethystRotateCounterClockwise LCTRL(LSHIFT(LALT(Key_J)))
 
 KEYMAPS(
 
@@ -173,14 +174,14 @@ KEYMAPS(
    Key_PageUp,   Key_A, Key_S, Key_D, Key_F, Key_G,
    Key_PageDown, Key_Z, Key_X, Key_C, Key_V, Key_B, Key_Escape,
    Key_Escape, Key_Backspace, OSM(LeftGui), OSM(LeftShift),
-   OSM(LeftGui),
+   OSL(FUNCTION),
 
-   LCTRL(Key_C),  Key_6, Key_7, Key_8, Key_9, Key_0, LGUI(Key_Backtick),
+   Key_AmethystMainWindow,  Key_6, Key_7, Key_8, Key_9, Key_0, LGUI(Key_Backtick),
    Key_Enter,     Key_Y, Key_U, Key_I,     Key_O,         Key_P,         Key_Equals,
                   Key_H, Key_J, Key_K,     Key_L,         Key_Semicolon, Key_Quote,
-   Key_Tab,  Key_N, Key_M, Key_Comma, Key_Period,    Key_Slash,     Key_Minus,
+   OSL(FUNCTION),  Key_N, Key_M, Key_Comma, Key_Period,    Key_Slash,     Key_Minus,
    OSM(LeftShift), OSM(LeftAlt), Key_Spacebar, OSM(LeftControl),
-   OSL(FUNCTION)),
+   OSM(LeftGui)),
 
 #else
 
@@ -196,9 +197,9 @@ KEYMAPS(
    ___, Key_Delete, Key_PageUp, Key_PageDown,
    ___,
 
-   LCTRL(Key_X), Key_F6,                 Key_F7,                   Key_F8,                   Key_F9,          Key_F10,          Key_F11,
+   Key_PageDown, Key_F6,                 Key_F7,                   Key_F8,                   Key_F9,          Key_F10,          Key_F11,
    Consumer_PlaySlashPause,    Consumer_ScanNextTrack, Key_LeftCurlyBracket,     Key_RightCurlyBracket,    Key_LeftBracket, Key_RightBracket, Key_F12,
-                               Key_LeftArrow,          Key_DownArrow,            Key_UpArrow,              Key_RightArrow,  Key_AmethystRotateCounterClockwise,              ___,
+                               Key_LeftArrow,          Key_DownArrow,            Key_UpArrow,              Key_RightArrow,  ___,              ___,
    Key_PcApplication,          Key_PageDown,           Key_PageUp, Consumer_VolumeDecrement, Consumer_VolumeIncrement,             Key_Backslash,    Key_Pipe,
    ___, ___, Key_Enter, ___,
    ___),
@@ -326,7 +327,7 @@ KALEIDOSCOPE_INIT_PLUGINS(
   // EEPROMKeymap,
   OneShot,
   TapDance,
-  EscapeOneShot,
+  // EscapeOneShot,
   Macros,
   // MacrosOnTheFly,
   MouseKeys,
@@ -341,13 +342,13 @@ void setup() {
   Kaleidoscope.setup();
   QUKEYS(
          kaleidoscope::plugin::Qukey(0, KeyAddr(0, 7), Key_LeftControl),
+         kaleidoscope::plugin::Qukey(0, KeyAddr(1, 0), Key_CommandShift),
          kaleidoscope::plugin::Qukey(0, KeyAddr(2, 0), Key_Magic),
          kaleidoscope::plugin::Qukey(0, KeyAddr(3, 0), Key_MyHyper),
-         kaleidoscope::plugin::Qukey(0, KeyAddr(3, 6), ShiftToLayer(FUNCTION)),
-         kaleidoscope::plugin::Qukey(0, KeyAddr(3, 9), Key_LeftGui)
+         kaleidoscope::plugin::Qukey(0, KeyAddr(3, 9), ShiftToLayer(FUNCTION))
          );
   Qukeys.setHoldTimeout(200);
-  Qukeys.setOverlapThreshold(75);
+  Qukeys.setOverlapThreshold(25);
   // First, call Kaleidoscope's internal setup function
 
   // AlphaSquare.color = {0xcb, 0xc0, 0xff};
