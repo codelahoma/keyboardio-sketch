@@ -355,6 +355,7 @@ void setup() {
          kaleidoscope::plugin::Qukey(0, KeyAddr(2, 6), Key_CommandShift),
          kaleidoscope::plugin::Qukey(0, KeyAddr(2, 9), Key_CommandShift),
          kaleidoscope::plugin::Qukey(0, KeyAddr(3, 0), Key_MyHyper),
+         kaleidoscope::plugin::Qukey(0, KeyAddr(3, 15), Key_MyHyper),
          kaleidoscope::plugin::Qukey(0, KeyAddr(3, 9), Key_LeftGui)
          );
   Qukeys.setHoldTimeout(200);
