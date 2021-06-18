@@ -173,7 +173,7 @@ KEYMAPS(
    Key_Backtick, Key_Q, Key_W, Key_E, Key_R, Key_T, Key_Tab,
    Key_PageUp,   Key_A, Key_S, Key_D, Key_F, Key_G,
    Key_PageDown, Key_Z, Key_X, Key_C, Key_V, Key_B, Key_Escape,
-   Key_Escape, Key_Backspace, OSM(LeftGui), OSM(LeftShift),
+   Key_Escape, Key_Backspace, OSM(LeftGui), OSM(LeftAlt),
    OSL(FUNCTION),
 
    LGUI(Key_H),  Key_6, Key_7, Key_8, Key_9, Key_0, LGUI(Key_Backtick),
