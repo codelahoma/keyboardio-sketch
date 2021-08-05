@@ -169,8 +169,8 @@ KEYMAPS(
   (TD(PROGESC),          Key_1, Key_2, Key_3, Key_4, Key_5, Key_LEDEffectNext,
    Key_Backtick, Key_Q, Key_W, Key_E, Key_R, Key_T, Key_Tab,
    Key_PageUp,   Key_A, Key_S, Key_D, Key_F, Key_G,
-   Key_PageDown, Key_Z, Key_X, Key_C, Key_V, Key_B, Key_Escape,
-   Key_Escape, Key_Backspace, OSM(LeftGui), OSM(LeftAlt),
+   Key_PageDown, Key_Z, Key_X, Key_C, Key_V, Key_B, Key_CommandShift,
+   Key_Escape, Key_Backspace, OSM(LeftGui), Key_MyHyper,
    OSL(FUNCTION),
 
    LGUI(Key_H),  Key_6, Key_7, Key_8, Key_9, Key_0, LGUI(Key_Backtick),
@@ -349,10 +349,10 @@ void setup() {
          kaleidoscope::plugin::Qukey(0, KeyAddr(0, 7), Key_LeftControl),
          kaleidoscope::plugin::Qukey(0, KeyAddr(1, 0), Key_CommandShift),
          kaleidoscope::plugin::Qukey(0, KeyAddr(2, 0), Key_Magic),
-         kaleidoscope::plugin::Qukey(0, KeyAddr(2, 6), Key_CommandShift),
+         // kaleidoscope::plugin::Qukey(0, KeyAddr(2, 6), Key_CommandShift),
          kaleidoscope::plugin::Qukey(0, KeyAddr(2, 9), Key_CommandShift),
          kaleidoscope::plugin::Qukey(0, KeyAddr(3, 0), Key_MyHyper),
-         kaleidoscope::plugin::Qukey(0, KeyAddr(3, 15), Key_MyHyper),
+         // kaleidoscope::plugin::Qukey(0, KeyAddr(3, 15), Key_MyHyper)
          kaleidoscope::plugin::Qukey(0, KeyAddr(3, 9), Key_LeftGui)
          );
   Qukeys.setHoldTimeout(200);
@@ -364,13 +364,14 @@ void setup() {
   LEDRainbowWaveEffect.brightness(150);
   LEDRainbowWaveEffect.update_delay(50);
 
+  OneShot.enableAutoModifiers();
   HeatmapEffect.heat_colors = heat_colors;
   HeatmapEffect.heat_colors_length = 8;
 
 //  WavepoolEffect.idle_timeout = 5000;  // 5 seconds
 //  WavepoolEffect.activate();
 
-  MouseWrapper.speedLimit = 64;
+  MouseWrapper.speedLimit = 128;
   MouseKeys.speed = 10;
   MouseKeys.accelDelay = 35;
 
