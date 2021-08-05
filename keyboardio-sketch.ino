@@ -161,9 +161,6 @@ static const cRGB heat_colors[] PROGMEM = {
 #define Key_MyHyper LCTRL(LALT(LSHIFT(Key_LeftGui)))
 #define Key_Magic LCTRL(LALT(Key_LeftGui))
 #define Key_CommandShift LSHIFT(Key_LeftGui)
-#define Key_AmethystMainWindow LSHIFT(LALT(Key_Enter))
-#define Key_AmethystRotateClockwise LCTRL(LSHIFT(LALT(Key_J)))
-#define Key_AmethystRotateCounterClockwise LCTRL(LSHIFT(LALT(Key_J)))
 
 KEYMAPS(
 
