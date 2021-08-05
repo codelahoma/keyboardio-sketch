@@ -54,7 +54,7 @@
 
 #include <Kaleidoscope-LED-ActiveModColor.h>
 #include <Kaleidoscope-TapDance.h>
-#include <Kaleidoscope-LED-Wavepool.h>
+// #include <Kaleidoscope-LED-Wavepool.h>
 #include <Kaleidoscope-LEDEffect-BootAnimation.h>
 #include <Kaleidoscope-Heatmap.h>
 // #include <Kaleidoscope-MacrosOnTheFly.h>
@@ -316,7 +316,7 @@ KALEIDOSCOPE_INIT_PLUGINS(
   LEDControl,
   BootAnimationEffect,
   LEDOff,
-  WavepoolEffect,
+  // WavepoolEffect,
   HeatmapEffect,
   // AlphaSquareEffect,
   LEDBreatheEffect,
@@ -370,8 +370,8 @@ void setup() {
   HeatmapEffect.heat_colors = heat_colors;
   HeatmapEffect.heat_colors_length = 8;
 
-  WavepoolEffect.idle_timeout = 5000;  // 5 seconds
-  WavepoolEffect.activate();
+//  WavepoolEffect.idle_timeout = 5000;  // 5 seconds
+//  WavepoolEffect.activate();
 
   MouseWrapper.speedLimit = 64;
   MouseKeys.speed = 10;
