@@ -10,6 +10,9 @@
 // The Kaleidoscope core
 #include "Kaleidoscope.h"
 
+// // Support for "Numpad" mode, which is mostly just the Numpad specific LED mode
+// #include "Kaleidoscope-NumPad.h"
+
 // Support for storing the keymap in EEPROM
 // #include "Kaleidoscope-EEPROM-Settings.h"
 // #include "Kaleidoscope-EEPROM-Keymap.h"
@@ -31,8 +34,8 @@
 
 #include <Kaleidoscope-IdleLEDs.h>
 
-// Support for an LED mode that makes all the LEDs 'breathe'
-#include "Kaleidoscope-LEDEffect-Breathe.h"
+// // Support for an LED mode that makes all the LEDs 'breathe'
+// #include "Kaleidoscope-LEDEffect-Breathe.h"
 
 // Support for an LED mode that makes a red pixel chase a blue pixel across the keyboard
 #include "Kaleidoscope-LEDEffect-Chase.h"
@@ -120,7 +123,7 @@ enum { LPBC,
   *
   */
 
-enum { PRIMARY,  FUNCTION, _EMPTY }; // layers
+enum { PRIMARY, NUMPAD, FUNCTION, _EMPTY }; // layers
 
 
 /**
@@ -173,7 +176,7 @@ KEYMAPS(
    Key_Escape, Key_Backspace, OSM(LeftGui), Key_MyHyper,
    OSL(FUNCTION),
 
-   LGUI(Key_H),  Key_6, Key_7, Key_8, Key_9, Key_0, LGUI(Key_Backtick),
+   LockLayer(NUMPAD),  Key_6, Key_7, Key_8, Key_9, Key_0, LGUI(Key_Backtick),
    Key_Enter,     Key_Y, Key_U, Key_I,     Key_O,         Key_P,         Key_Equals,
                   Key_H, Key_J, Key_K,     Key_L,         Key_Semicolon, Key_Quote,
    LALT(Key_Enter),  Key_N, Key_M, Key_Comma, Key_Period,    Key_Slash,     Key_Minus,
@@ -186,6 +189,22 @@ KEYMAPS(
 
 #endif
 
+  [NUMPAD] =  KEYMAP_STACKED
+  (___, ___, ___, ___, ___, ___, ___,
+   ___, ___, ___, ___, ___, ___, ___,
+   ___, ___, ___, ___, ___, ___,
+   ___, ___, ___, ___, ___, ___, ___,
+   ___, ___, ___, ___,
+   ___,
+
+   ___,  ___, Key_7, Key_8,      Key_9,              Key_KeypadSubtract, ___,
+   ___,                    ___, Key_4, Key_5,      Key_6,              Key_KeypadAdd,      ___,
+                           ___, Key_1, Key_2,      Key_3,              Key_Equals,         ___,
+   ___,                    ___, Key_0, Key_Period, Key_KeypadMultiply, Key_KeypadDivide,   Key_Enter,
+   ___, ___, ___, ___,
+   ___),
+
+
   [FUNCTION] =  KEYMAP_STACKED
   (Key_mouseScrollUp,      Key_F1,           Key_F2,      Key_F3,     Key_F4,        Key_F5,           Key_PageUp,
    Key_mouseScrollDn,  ___,              Key_mouseUp, ___,        Key_mouseBtnR, Key_mouseWarpEnd, Key_mouseWarpNE,
@@ -194,7 +213,7 @@ KEYMAPS(
    ___, Key_Delete, Key_PageUp, Key_PageDown,
    ___,
 
-   Key_PageDown, Key_F6,                 Key_F7,                   Key_F8,                   Key_F9,          Key_F10,          Key_F11,
+   Consumer_ScanPreviousTrack, Key_F6,                 Key_F7,                   Key_F8,                   Key_F9,          Key_F10,          Key_F11,
    Consumer_PlaySlashPause,    Consumer_ScanNextTrack, Key_LeftCurlyBracket,     Key_RightCurlyBracket,    Key_LeftBracket, Key_RightBracket, Key_F12,
                                Key_LeftArrow,          Key_DownArrow,            Key_UpArrow,              Key_RightArrow,  ___,              ___,
    Key_PcApplication,          Key_PageDown,           Key_PageUp, Consumer_VolumeDecrement, Consumer_VolumeIncrement,             Key_Backslash,    Key_Pipe,
@@ -227,12 +246,12 @@ KEYMAPS(
  *  prints out the firmware build information as virtual keystrokes
  */
 
-static void versionInfoMacro(uint8_t keyState) {
-  if (keyToggledOn(keyState)) {
-    Macros.type(PSTR("Keyboardio Model 01 - Kaleidoscope "));
-    Macros.type(PSTR(BUILD_INFORMATION));
-  }
-}
+// static void versionInfoMacro(uint8_t keyState) {
+//   if (keyToggledOn(keyState)) {
+//     Macros.type(PSTR("Keyboardio Model 01 - Kaleidoscope "));
+//     Macros.type(PSTR(BUILD_INFORMATION));
+//   }
+// }
 
 /** anyKeyMacro is used to provide the functionality of the 'Any' key.
  *
@@ -270,9 +289,9 @@ static void versionInfoMacro(uint8_t keyState) {
 const macro_t *macroAction(uint8_t macroIndex, uint8_t keyState) {
   switch (macroIndex) {
 
-  case MACRO_VERSION_INFO:
-    versionInfoMacro(keyState);
-    break;
+  // case MACRO_VERSION_INFO:
+  //   versionInfoMacro(keyState);
+  //   break;
 
   // case MACRO_ANY:
   //   anyKeyMacro(keyState);
@@ -316,8 +335,8 @@ KALEIDOSCOPE_INIT_PLUGINS(
   // WavepoolEffect,
   HeatmapEffect,
   // AlphaSquareEffect,
-  LEDBreatheEffect,
-  // LEDEffect-Chase,
+  // LEDBreatheEffect,
+  LEDChaseEffect,
   LEDRainbowEffect,
   LEDRainbowWaveEffect,
   // EEPROMSettings,
@@ -328,6 +347,7 @@ KALEIDOSCOPE_INIT_PLUGINS(
   Macros,
   // MacrosOnTheFly,
   MouseKeys,
+  // NumPad,
   ActiveModColorEffect
 );
 
@@ -353,7 +373,7 @@ void setup() {
          kaleidoscope::plugin::Qukey(0, KeyAddr(2, 9), Key_CommandShift),
          kaleidoscope::plugin::Qukey(0, KeyAddr(3, 0), Key_MyHyper),
          // kaleidoscope::plugin::Qukey(0, KeyAddr(3, 15), Key_MyHyper)
-         kaleidoscope::plugin::Qukey(0, KeyAddr(3, 9), Key_LeftGui)
+         // kaleidoscope::plugin::Qukey(0, KeyAddr(3, 9), Key_LeftGui)
          );
   Qukeys.setHoldTimeout(200);
   Qukeys.setOverlapThreshold(80);
@@ -374,6 +394,9 @@ void setup() {
   MouseWrapper.speedLimit = 128;
   MouseKeys.speed = 10;
   MouseKeys.accelDelay = 35;
+
+  // NumPad.color = CRGB(0, 0, 160); // a blue color
+  // NumPad.lock_hue = 85; // green
 
 
   LEDOff.activate();
