@@ -23,7 +23,6 @@
 
 #include "Kaleidoscope.h"
 #include "Kaleidoscope-EEPROM-Settings.h"
-#include "Kaleidoscope-EEPROM-Keymap.h"
 #include "Kaleidoscope-FocusSerial.h"
 #include "Kaleidoscope-Macros.h"
 #include "Kaleidoscope-MouseKeys.h"
@@ -102,7 +101,7 @@ KEYMAPS(
       Key_Q,           Key_W,                Key_E,                 Key_R,           Key_T,
       Key_A,           Key_S,                Key_D,                 Key_F,           Key_G,
       Key_Z,           Key_X,                Key_C,                 Key_V,           Key_B,            SFT_T(Tab),
-      OSL(FUN),         Key_Backtick,         Key_LeftShift,         Key_Backspace,   Key_LeftGui,      CTL_T(Esc),
+      OSL(FUN),         Key_Backtick,        OSM(LeftGui),      OSM(LeftShift),         Key_Backspace,        CTL_T(Esc),
 
       // Right
                        Key_Y,                Key_U,                 Key_I,           Key_O,            Key_P,
@@ -145,7 +144,6 @@ KEYMAPS(
 
 KALEIDOSCOPE_INIT_PLUGINS(
   EEPROMSettings,
-  EEPROMKeymap,
   Focus,
   FocusEEPROMCommand,
   FocusSettingsCommand,
@@ -182,7 +180,6 @@ const macro_t *macroAction(uint8_t macroIndex, uint8_t keyState) {
 void setup() {
   Kaleidoscope.setup();
   SpaceCadet.disable();
-  EEPROMKeymap.setup(10);
   /**
     * Qukeys configs
     * format Qukey(layer, row, col, alt_keycode)
