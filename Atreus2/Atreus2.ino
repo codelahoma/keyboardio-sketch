@@ -112,21 +112,6 @@ enum {
 
 /* *INDENT-OFF* */
 KEYMAPS(
-    /* QWERTY:
-      +-------+-------+-------+-------+-------+
-      | Q     | W     | E     | R     | T     |
-      | A     | S     | D     | F     | G     +-------+
-      | Z     | X     | C     | V     | B     | Tab   |
-      | L1    | Bspc  | Ctrl  | Cmd   | Shift | Esc   |
-      +-------+-------+-------+-------+-------+-------+
-
-      .       +-------+-------+-------+-------+-------+
-      .       | Y     | U     | I     | O     | P     |
-      +-------| H     | J     | K     | L     | ;     |
-      | Enter | N     | M     | ,     | .     | /     |
-      | Space | Shift | Alt   | -     | '     | L2    |
-      +-------+-------+-------+-------+-------+-------+
-    */
   [_QWERTY] = KEYMAP_STACKED
   (
    Key_Q,              Key_W,         Key_E,            Key_R,         Key_T,
@@ -151,51 +136,36 @@ KEYMAPS(
    // right
                     ___,            Key_LeftCurlyBracket,    Key_LeftBracket,      LSHIFT(Key_9),    ___,
                     Key_LeftArrow,  Key_DownArrow,           Key_UpArrow,          Key_RightArrow,   Key_Equals,
-   Key_PageUp,      ___,            Key_RightCurlyBracket,   Key_RightBracket,     LSHIFT(Key_0),    ___,
-   Key_PageDown,    Key_Mute,       Key_VolumeDown,          Key_VolumeUp,         ___,              LockLayer(_MOUSE)
+   ___,             ___,            Key_RightCurlyBracket,   Key_RightBracket,     LSHIFT(Key_0),    ___,
+   ___,             Key_Mute,       Key_VolumeDown,          Key_VolumeUp,         ___,              LockLayer(_MOUSE)
    ),
 
   [_RAISE] = KEYMAP_STACKED
   (
-      // Left
-      Key_1,           Key_2,                Key_3,                 Key_4,                   Key_5,
-      ___,             LSHIFT(Key_9),  Key_LeftBracket,       Key_LeftCurlyBracket,  ___,
-      ___,             ___,                  ___,                   ___,                   ___,              Key_LeftShift,
-      Key_PrintScreen, ___,                  Key_LeftShift,         Key_Delete,            Key_LeftGui,      Key_LeftControl,
+   // Left
+   Key_1,           Key_2,                Key_3,                 Key_4,                   Key_5,
+   ___,             LSHIFT(Key_9),  Key_LeftBracket,       Key_LeftCurlyBracket,  ___,
+   ___,             ___,                  ___,                   ___,                   ___,              Key_LeftShift,
+   Key_PrintScreen, ___,                  Key_LeftShift,         Key_Delete,            Key_LeftGui,      Key_LeftControl,
 
-      // Right
-                       Key_6,                Key_7,                 Key_8,                 Key_9,            Key_0,
-                       Key_LeftArrow,        Key_DownArrow,         Key_UpArrow,           Key_RightArrow,   Key_Equals,
-      ___,             Key_LeftCurlyBracket, Key_RightCurlyBracket, Key_LeftBracket,       Key_RightBracket, Key_Plus,
-      ___,             ___,                  ___,                   ___,             ___,              ___
+   // Right
+                    Key_6,                Key_7,                 Key_8,                 Key_9,            Key_0,
+                    Key_LeftArrow,        Key_DownArrow,         Key_UpArrow,           Key_RightArrow,   Key_Equals,
+   ___,             Key_LeftCurlyBracket, Key_RightCurlyBracket, Key_LeftBracket,       Key_RightBracket, Key_Plus,
+   ___,             ___,                  ___,                   ___,             ___,              ___
    ),
 
-  /* _MOUSE
-     +-------+-------+-------+-------+-------+
-     | PrScr | WClr  |       |       |       |
-     |  Ins  |  WNW  |  WNE  |       |       +-------+
-     |       |  WSW  |  WSE  |       |       |       |
-     | *L3*  |  Ctrl |  Cmd  |  Cmd  | Shift |  Esc  |
-     +-------+-------+-------+-------+-------+-------+
-
-     .       +-------+-------+-------+-------+-------+
-     .       |       |  MUp  |       |  MBL  |       |
-     +-------| MLeft | MDown | MRght |  MBM  |       |
-     |       |       |       |       |  MBR  |       |
-     |       | Shift |  Alt  |       |       | *L3*  |
-     +-------+-------+-------+-------+-------+-------+
-  */
   [_MOUSE] = KEYMAP_STACKED
   (
-   Key_mouseWarpEnd,    XXX,              Key_PrintScreen,     XXX,               XXX,
-   Key_mouseWarpNW,     Key_mouseWarpNE,  Key_Insert,          XXX,               XXX,
-   Key_mouseWarpSW,     Key_mouseWarpSE,  XXX,                 XXX,               ___,             ___,
-   XXX,                 ___,              ___,                 ___,               ___,             ___,
+   XXX,     XXX,            XXX,               XXX,               Key_mouseWarpEnd,
+   XXX,     XXX,            XXX,               Key_mouseWarpNW,   Key_mouseWarpNE,
+   XXX,     XXX,            XXX,               XXX,               Key_mouseWarpSW,  Key_mouseWarpSE,
+   ___,     ___,            ___,               ___,               ___,              ___,
 
-   XXX,                 XXX,                 Key_mouseUp,       XXX,               Key_mouseBtnL,
-   XXX,                 Key_mouseL,          Key_mouseDn,       Key_mouseR,        Key_mouseBtnM,
-   XXX,                 XXX,                 XXX,               XXX,               Key_mouseBtnR,   ___,
-   XXX,                 ___,                 ___,               XXX,               XXX, MoveToLayer(_QWERTY)
+            XXX,            XXX,               Key_mouseUp,       XXX,              Key_mouseBtnL,
+            XXX,            Key_mouseL,        Key_mouseDn,       Key_mouseR,       Key_mouseBtnM,
+   XXX,     XXX,            XXX,               XXX,               XXX,              Key_mouseBtnR,
+   ___,     ___,            ___,               ___,               ___,              MoveToLayer(_QWERTY)
    )
 )
 /* *INDENT-ON* */
