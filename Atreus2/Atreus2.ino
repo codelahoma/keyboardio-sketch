@@ -28,7 +28,6 @@
 #include "Kaleidoscope-MouseKeys.h"
 #include "Kaleidoscope-OneShot.h"
 #include "Kaleidoscope-Qukeys.h"
-#include "Kaleidoscope-SpaceCadet.h"
 #include "Kaleidoscope-ShapeShifter.h"
 
 /* -*- mode: c++ -*-
@@ -76,6 +75,17 @@ enum {
 #define Key_VolumeDown Consumer_VolumeDecrement
 #define Key_VolumeUp Consumer_VolumeIncrement
 #define Key_Mute Consumer_Mute
+#define Key_BSpc Key_Backspace
+#define Key_VolUp Consumer_VolumeIncrement
+#define Key_VolDn Consumer_VolumeDecrement
+#define Key_LCBracket LSHIFT(Key_LeftBracket)
+#define Key_RCBracket LSHIFT(Key_RightBracket)
+#define Key_Star LSHIFT(Key_8)
+
+#define Key_Up Key_UpArrow
+#define Key_Down Key_DownArrow
+#define Key_Left Key_LeftArrow
+#define Key_Right Key_RightArrow
 
 /* -*- mode: c++ -*-
  * QuKeys provides the following helpful shortcuts
@@ -88,81 +98,115 @@ enum {
  */
 
 enum {
-  QWERTY,
-  FUN,
-  UPPER
+  _QWERTY,
+  _LOWER,
+  _RAISE,
+  _MOUSE
 };
+
+#define Key_MyHyper LCTRL(LALT(LSHIFT(Key_LeftGui)))
+#define Key_Magic LCTRL(LALT(Key_LeftGui))
+#define Key_CommandShift LSHIFT(Key_LeftGui)
+
 
 /* *INDENT-OFF* */
 KEYMAPS(
-  [QWERTY] = KEYMAP_STACKED
-  (
-      // Left
-      Key_Q,           Key_W,                Key_E,                 Key_R,           Key_T,
-      Key_A,           Key_S,                Key_D,                 Key_F,           Key_G,
-      Key_Z,           Key_X,                Key_C,                 Key_V,           Key_B,            SFT_T(Tab),
-      OSL(FUN),         Key_Backtick,        OSM(LeftGui),      OSM(LeftShift),         Key_Backspace,        CTL_T(Esc),
+    /* QWERTY:
+      +-------+-------+-------+-------+-------+
+      | Q     | W     | E     | R     | T     |
+      | A     | S     | D     | F     | G     +-------+
+      | Z     | X     | C     | V     | B     | Tab   |
+      | L1    | Bspc  | Ctrl  | Cmd   | Shift | Esc   |
+      +-------+-------+-------+-------+-------+-------+
 
-      // Right
-                       Key_Y,                Key_U,                 Key_I,           Key_O,            Key_P,
-                       Key_H,                Key_J,                 Key_K,           Key_L,            CTL_T(Semicolon),
-      GUI_T(Enter),    Key_N,                Key_M,                 Key_Comma,       Key_Period,       Key_Slash,
-      ALT_T(Home),       Key_Space,             Key_Minus,       Key_Backslash,    Key_Quote,     LT(UPPER, End)
+      .       +-------+-------+-------+-------+-------+
+      .       | Y     | U     | I     | O     | P     |
+      +-------| H     | J     | K     | L     | ;     |
+      | Enter | N     | M     | ,     | .     | /     |
+      | Space | Shift | Alt   | -     | '     | L2    |
+      +-------+-------+-------+-------+-------+-------+
+    */
+  [_QWERTY] = KEYMAP_STACKED
+  (
+       Key_Q         ,Key_W           ,Key_E            ,Key_R        ,Key_T
+      ,Key_A         ,Key_S           ,Key_D            ,Key_F        ,Key_G
+      ,Key_Z         ,Key_X           ,Key_C            ,Key_V        ,Key_B,         Key_Tab
+       ,OSL(_LOWER)   ,OSM(LeftAlt),    OSM(LeftControl) ,OSM(LeftGui) ,Key_BSpc,     Key_Esc
+
+                     ,Key_Y           ,Key_U            ,Key_I        ,Key_O         ,Key_P
+                     ,Key_H           ,Key_J            ,Key_K        ,Key_L         ,Key_Semicolon
+       ,Key_Enter    ,Key_N           ,Key_M            ,Key_Comma    ,Key_Period    ,Key_Slash
+       ,Key_MyHyper  ,Key_Space       ,OSM(LeftShift)     ,Key_Minus    ,Key_Quote     ,OSL(_RAISE)
   ),
 
-  [FUN] = KEYMAP_STACKED
+  [_LOWER] = KEYMAP_STACKED
   (
       // Left
-      Key_F1,          Key_F2,               Key_F3,                Key_F4,          Key_F5,
-      XXX,             Key_mouseUp,          XXX,                   Key_mouseBtnR,   Key_mouseWarpEnd,
-      Key_mouseL,      Key_mouseDn,          Key_mouseR,            Key_mouseBtnL,   Key_mouseWarpNW,  Key_mouseWarpNE,
-      ___,             ___,                  ___,                   Key_mouseBtnM,   Key_mouseWarpSW,  Key_mouseWarpSE,
+      Key_1,          Key_2,               Key_3,                Key_4,          Key_5,
+      ___,            ___,                 ___,                  ___,            ___,
+      ___,            ___,                 ___,                  ___,            ___,      ___,
+      ___,            ___,                 ___,                  ___,            ___,      ___,
 
-      // Right
-                       Key_F6,               Key_F7,                Key_F8,          Key_F9,           Key_F10,
-                       Key_PlayPause,        Key_PrevTrack,         Key_NextTrack,   Key_F11,          Key_F12,
-      Key_PageUp,      Key_Mute,             Key_VolumeDown,        Key_VolumeUp,    ___,              ___,
-      Key_PageDown,    ___,                  ___,                   ___,             ___,              ___
+      // right
+                       ___,                   Key_LeftCurlyBracket,  Key_LeftBracket, LSHIFT(Key_9),          ___,
+                       Key_LeftArrow,         Key_DownArrow,         Key_UpArrow,     Key_RightArrow,   Key_Equals,
+      Key_PageUp,      ___,                   Key_RightCurlyBracket, Key_RightBracket,     LSHIFT(Key_0),                  ___,
+      Key_PageDown,    Key_Mute,              Key_VolumeDown,        Key_VolumeUp,    ___,              LockLayer(_MOUSE)
    ),
 
-  [UPPER] = KEYMAP_STACKED
+  [_RAISE] = KEYMAP_STACKED
   (
       // Left
-      Key_1,           Key_2,                Key_3,                 Key_4,           Key_5,
-      ___,             ___,                  ___,                   ___,             ___,
-      ___,             ___,                  ___,                   ___,             ___,              Key_LeftShift,
-      Key_PrintScreen, ___,                  Key_LeftShift,         Key_Delete,      Key_LeftGui,      Key_LeftControl,
+      Key_1,           Key_2,                Key_3,                 Key_4,                   Key_5,
+      ___,             LSHIFT(Key_9),  Key_LeftBracket,       Key_LeftCurlyBracket,  ___,
+      ___,             ___,                  ___,                   ___,                   ___,              Key_LeftShift,
+      Key_PrintScreen, ___,                  Key_LeftShift,         Key_Delete,            Key_LeftGui,      Key_LeftControl,
 
       // Right
-                       Key_6,                Key_7,                 Key_8,           Key_9,            Key_0,
-                       Key_LeftArrow,        Key_DownArrow,         Key_UpArrow,     Key_RightArrow,   Key_Equals,
-      ___,             Key_LeftCurlyBracket, Key_RightCurlyBracket, Key_LeftBracket, Key_RightBracket, Key_Plus,
+                       Key_6,                Key_7,                 Key_8,                 Key_9,            Key_0,
+                       Key_LeftArrow,        Key_DownArrow,         Key_UpArrow,           Key_RightArrow,   Key_Equals,
+      ___,             Key_LeftCurlyBracket, Key_RightCurlyBracket, Key_LeftBracket,       Key_RightBracket, Key_Plus,
       ___,             ___,                  ___,                   ___,             ___,              ___
+   ),
+
+  /* _MOUSE
+     +-------+-------+-------+-------+-------+
+     | PrScr | WClr  |       |       |       |
+     |  Ins  |  WNW  |  WNE  |       |       +-------+
+     |       |  WSW  |  WSE  |       |       |       |
+     | *L3*  |  Ctrl |  Cmd  |  Cmd  | Shift |  Esc  |
+     +-------+-------+-------+-------+-------+-------+
+
+     .       +-------+-------+-------+-------+-------+
+     .       |       |  MUp  |       |  MBL  |       |
+     +-------| MLeft | MDown | MRght |  MBM  |       |
+     |       |       |       |       |  MBR  |       |
+     |       | Shift |  Alt  |       |       | *L3*  |
+     +-------+-------+-------+-------+-------+-------+
+  */
+  [_MOUSE] = KEYMAP_STACKED
+  (
+   Key_mouseWarpEnd,    XXX,              Key_PrintScreen,     XXX,               XXX,
+   Key_mouseWarpNW,     Key_mouseWarpNE,  Key_Insert,          XXX,               XXX,
+   Key_mouseWarpSW,     Key_mouseWarpSE,  XXX,                 XXX,               ___,             ___,
+   XXX,                 ___,              ___,                 ___,               ___,             ___,
+
+   XXX,                 XXX,                 Key_mouseUp,       XXX,               Key_mouseBtnL,
+   XXX,                 Key_mouseL,          Key_mouseDn,       Key_mouseR,        Key_mouseBtnM,
+   XXX,                 XXX,                 XXX,               XXX,               Key_mouseBtnR,   ___,
+   XXX,                 ___,                 ___,               XXX,               XXX, MoveToLayer(_QWERTY)
    )
 )
 /* *INDENT-ON* */
-
-KALEIDOSCOPE_INIT_PLUGINS(
-  EEPROMSettings,
-  Focus,
-  FocusEEPROMCommand,
-  FocusSettingsCommand,
-  Qukeys,
-  OneShot,
-  ShapeShifter,
-  SpaceCadet,
-  MouseKeys,
-  Macros
-);
 
 const macro_t *macroAction(uint8_t macroIndex, uint8_t keyState) {
   switch (macroIndex) {
   case MACRO_QWERTY:
     // This macro is currently unused, but is kept around for compatibility
-    // reasons. We used to use it in place of `MoveToLayer(QWERTY)`, but no
+    // reasons. We used to use it in place of `MoveToLayer(_QWERTY)`, but no
     // longer do. We keep it so that if someone still has the old layout with
     // the macro in EEPROM, it will keep working after a firmware update.
-    Layer.move(QWERTY);
+    Layer.move(_QWERTY);
     break;
   case MACRO_VERSION_INFO:
     if (keyToggledOn(keyState)) {
@@ -177,9 +221,28 @@ const macro_t *macroAction(uint8_t macroIndex, uint8_t keyState) {
   return MACRO_NONE;
 }
 
+KALEIDOSCOPE_INIT_PLUGINS(
+                          EEPROMSettings,
+                          Focus,
+                          FocusEEPROMCommand,
+                          FocusSettingsCommand,
+                          Qukeys,
+                          OneShot,
+                          ShapeShifter,
+                          MouseKeys,
+                          Macros
+                          );
+
 void setup() {
   Kaleidoscope.setup();
-  SpaceCadet.disable();
+
+  OneShot.enableAutoModifiers();
+
+  MouseWrapper.speedLimit = 128;
+  MouseKeys.speed = 10;
+  MouseKeys.accelDelay = 35;
+
+
   /**
     * Qukeys configs
     * format Qukey(layer, row, col, alt_keycode)
@@ -195,7 +258,7 @@ void setup() {
     // kaleidoscope::plugin::Qukey(0, KeyAddr(2, 5), Key_LeftShift),    // Tab / Shift
     // kaleidoscope::plugin::Qukey(0, KeyAddr(3, 5), Key_LeftControl),  // Esc / Control
     // kaleidoscope::plugin::Qukey(0, KeyAddr(3, 6), Key_LeftAlt),      // Home / Alt
-    // kaleidoscope::plugin::Qukey(0, KeyAddr(3, 7), MO(UPPER)),        // End / ShiftToLayer(Upper)
+    // kaleidoscope::plugin::Qukey(0, KeyAddr(3, 7), MO(_RAISE)),        // End / ShiftToLayer(Upper)
   // )
 }
 
