@@ -122,37 +122,37 @@ KEYMAPS(
                        Key_Y,         Key_U,            Key_I,         Key_O,         Key_P,
                        Key_H,         Key_J,            Key_K,         Key_L,         Key_Semicolon,
    Key_Enter,          Key_N,         Key_M,            Key_Comma,     Key_Period,    Key_Slash,
-   OSM(LeftShift),     Key_Space,     OSM(LeftGui),     Key_Minus,     Key_Quote,     OSL(_RAISE)
+   OSM(LeftShift),     Key_Space,     OSM(LeftGui),     OSL(_RAISE),     Key_Quote,   Key_Minus
   ),
 
   [_LOWER] = KEYMAP_STACKED
   (
    // Left
-   Key_1,            Key_2,         Key_3,                   Key_4,                Key_5,
+   Key_Quote,            Key_2,         Key_3,                   Key_4,                Key_Quote,
    ___,              ___,           ___,                     ___,                  ___,
    ___,              ___,           ___,                     ___,                  ___,              ___,
    ___,              ___,           ___,                     ___,                  ___,              ___,
 
    // right
-                    ___,            Key_LeftCurlyBracket,    Key_LeftBracket,      LSHIFT(Key_9),    ___,
-                    Key_LeftArrow,  Key_DownArrow,           Key_UpArrow,          Key_RightArrow,   Key_Equals,
-   ___,             ___,            Key_RightCurlyBracket,   Key_RightBracket,     LSHIFT(Key_0),    ___,
-   ___,             Key_Mute,       Key_VolumeDown,          Key_VolumeUp,         ___,              LockLayer(_MOUSE)
+                    Key_Minus,      Key_LeftCurlyBracket,    Key_LeftBracket,      LSHIFT(Key_9),    Key_Backtick,
+                    Key_LeftArrow,  Key_DownArrow,           Key_UpArrow,          Key_RightArrow,   Key_Pipe,
+   ___,             ___,            Key_RightCurlyBracket,   Key_RightBracket,     LSHIFT(Key_0),    Key_Backslash,
+   ___,             ___,            ___,                     ___,                  ___,              LockLayer(_MOUSE)
    ),
 
   [_RAISE] = KEYMAP_STACKED
   (
    // Left
-   Key_1,           Key_2,                Key_3,                 Key_4,                   Key_5,
-   ___,             LSHIFT(Key_9),  Key_LeftBracket,       Key_LeftCurlyBracket,  ___,
-   ___,             ___,                  ___,                   ___,                   ___,              Key_LeftShift,
-   Key_PrintScreen, ___,                  Key_LeftShift,         Key_Delete,            Key_LeftGui,      Key_LeftControl,
+   Key_1,           Key_2,       Key_3,              Key_4,              Key_5,
+   Key_VolDn,       Key_VolUp,   Key_PrevTrack,      Key_PlayPause,      Key_NextTrack,
+   ___,             ___,         ___,                ___,                ___,              Key_LeftShift,
+   ___,             ___,         ___,                ___,                ___,              ___,
 
    // Right
-                    Key_6,                Key_7,                 Key_8,                 Key_9,            Key_0,
-                    Key_LeftArrow,        Key_DownArrow,         Key_UpArrow,           Key_RightArrow,   Key_Equals,
-   ___,             Key_LeftCurlyBracket, Key_RightCurlyBracket, Key_LeftBracket,       Key_RightBracket, Key_Plus,
-   ___,             ___,                  ___,                   ___,             ___,              ___
+                    Key_6,       Key_7,              Key_8,              Key_9,            Key_0,
+                    ___,         ___,                ___,                ___,              Key_Equals,
+   ___,             ___,         ___,                ___,                ___,              Key_Plus,
+   ___,             ___,         ___,                ___,                ___,              ___
    ),
 
   [_MOUSE] = KEYMAP_STACKED
