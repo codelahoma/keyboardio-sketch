@@ -129,15 +129,15 @@ KEYMAPS(
     */
   [_QWERTY] = KEYMAP_STACKED
   (
-       Key_Q         ,Key_W           ,Key_E            ,Key_R        ,Key_T
-      ,Key_A         ,Key_S           ,Key_D            ,Key_F        ,Key_G
-      ,Key_Z         ,Key_X           ,Key_C            ,Key_V        ,Key_B,         Key_Tab
-       ,OSL(_LOWER), OSM(LeftAlt),    Key_MyHyper ,Key_Esc ,Key_BSpc,     OSM(LeftControl)
+   Key_Q,              Key_W,         Key_E,            Key_R,         Key_T,
+   Key_A,              Key_S,         Key_D,            Key_F,         Key_G,
+   Key_Z,              Key_X,         Key_C,            Key_V,         Key_B,         Key_Tab,
+   OSL(_LOWER),        OSM(LeftAlt),  Key_MyHyper,      Key_Esc,       Key_BSpc,      OSM(LeftControl),
 
-                     ,Key_Y           ,Key_U            ,Key_I        ,Key_O         ,Key_P
-                     ,Key_H           ,Key_J            ,Key_K        ,Key_L         ,Key_Semicolon
-       ,Key_Enter    ,Key_N           ,Key_M            ,Key_Comma    ,Key_Period    ,Key_Slash
-       ,OSM(LeftShift)  ,Key_Space       ,OSM(LeftGui)     ,Key_Minus    ,Key_Quote     ,OSL(_RAISE)
+   Key_Y,              Key_U,         Key_I,            Key_O,         Key_P,
+   Key_H,              Key_J,         Key_K,            Key_L,         Key_Semicolon,
+   Key_Enter,          Key_N,         Key_M,            Key_Comma,     Key_Period,    Key_Slash,
+   OSM(LeftShift),     Key_Space,     OSM(LeftGui),     Key_Minus,     Key_Quote,     OSL(_RAISE)
   ),
 
   [_LOWER] = KEYMAP_STACKED
