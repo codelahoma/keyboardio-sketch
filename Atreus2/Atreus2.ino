@@ -122,7 +122,7 @@ KEYMAPS(
                        Key_Y,         Key_U,            Key_I,         Key_O,         Key_P,
                        Key_H,         Key_J,            Key_K,         Key_L,         Key_Semicolon,
    Key_Enter,          Key_N,         Key_M,            Key_Comma,     Key_Period,    Key_Slash,
-   OSM(LeftShift),     Key_Space,     OSM(LeftGui),     OSL(_RAISE),     Key_Quote,   Key_Minus
+   OSM(LeftShift),     Key_Space,     OSM(LeftGui),     Key_Minus,     Key_Quote,     OSL(_RAISE)
   ),
 
   [_LOWER] = KEYMAP_STACKED
@@ -135,9 +135,9 @@ KEYMAPS(
 
    // right
                     Key_Minus,      Key_LeftCurlyBracket,    Key_LeftBracket,      LSHIFT(Key_9),    Key_Backtick,
-                    Key_LeftArrow,  Key_DownArrow,           Key_UpArrow,          Key_RightArrow,   Key_Pipe,
-   ___,             ___,            Key_RightCurlyBracket,   Key_RightBracket,     LSHIFT(Key_0),    Key_Backslash,
-   ___,             ___,            ___,                     ___,                  ___,              LockLayer(_MOUSE)
+                    Key_LeftArrow,  Key_DownArrow,           Key_UpArrow,          Key_RightArrow,   Key_Backslash,
+   ___,             ___,            Key_RightCurlyBracket,   Key_RightBracket,     LSHIFT(Key_0),    Key_Equals,
+   ___,             Key_Enter,            ___,                     ___,                  ___,              LockLayer(_MOUSE)
    ),
 
   [_RAISE] = KEYMAP_STACKED
@@ -162,8 +162,8 @@ KEYMAPS(
    XXX,     XXX,            XXX,               XXX,               Key_mouseWarpSW,  Key_mouseWarpSE,
    ___,     ___,            ___,               ___,               ___,              ___,
 
-            XXX,            XXX,               Key_mouseUp,       XXX,              Key_mouseBtnL,
-            XXX,            Key_mouseL,        Key_mouseDn,       Key_mouseR,       Key_mouseBtnM,
+            XXX,            XXX,               XXX,       XXX,              Key_mouseBtnL,
+            Key_mouseL,            Key_mouseDn,        Key_mouseUp,       Key_mouseR,       Key_mouseBtnM,
    XXX,     XXX,            XXX,               XXX,               XXX,              Key_mouseBtnR,
    ___,     ___,            ___,               ___,               ___,              MoveToLayer(_QWERTY)
    )
