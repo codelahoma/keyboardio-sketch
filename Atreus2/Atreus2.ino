@@ -158,8 +158,8 @@ KEYMAPS(
 
   [_MOUSE] = KEYMAP_STACKED
   (
-   XXX,     XXX,            XXX,               XXX,               Key_mouseWarpEnd,
-   XXX,     XXX,            XXX,               Key_mouseWarpNW,   Key_mouseWarpNE,
+   XXX,     Key_mouseScrollDn,            XXX,               XXX,               Key_mouseWarpEnd,
+   XXX,     Key_mouseScrollUp,            XXX,               Key_mouseWarpNW,   Key_mouseWarpNE,
    XXX,     XXX,            XXX,               Key_mouseWarpSW,   Key_mouseWarpSE,  XXX,
    ___,     ___,            ___,               ___,               ___,              ___,
 
