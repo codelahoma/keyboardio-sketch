@@ -102,7 +102,8 @@ enum {
   _QWERTY,
   _LOWER,
   _RAISE,
-  _MOUSE
+  _MOUSE,
+  _FUNCTION,
 };
 
 #define Key_MyHyper LCTRL(LALT(LSHIFT(Key_LeftGui)))
@@ -166,6 +167,21 @@ KEYMAPS(
    Key_mouseL,     Key_mouseDn,       Key_mouseUp,       Key_mouseR,        XXX,
    XXX,            XXX,               XXX,               XXX,               XXX,    XXX,
    ___,            ___,               ___,               ___,               ___,    MoveToLayer(_QWERTY)
+   ),
+
+  [_FUNCTION] = KEYMAP_STACKED
+  (
+   // Left
+   Key_F1,           Key_F2,       Key_F3,              Key_F4,              Key_F5,
+   ___,              ___,           ___,                     ___,                  ___,
+   ___,              ___,           ___,                     ___,                  ___,              ___,
+   ___,              ___,           ___,                     ___,                  ___,              ___,
+
+   // right
+   Key_F6,          Key_F7,      Key_F8,             Key_F9,             Key_F10,
+   Key_F11,         Key_F12,     Key_F13,            Key_F14,            Key_F15,
+   ___,             ___,         ___,                ___,                ___,              ___,
+   ___,             ___,         ___,                ___,                ___,              ___
    )
 )
 /* *INDENT-ON* */
