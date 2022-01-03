@@ -128,7 +128,7 @@ KEYMAPS(
   [_LOWER] = KEYMAP_STACKED
   (
    // Left
-   Key_Quote,            Key_2,         Key_3,                   Key_4,                Key_Quote,
+   ___,              ___,           ___,                     ___,                  ___,
    ___,              ___,           ___,                     ___,                  ___,
    ___,              ___,           ___,                     ___,                  ___,              ___,
    ___,              ___,           ___,                     ___,                  ___,              ___,
@@ -137,21 +137,21 @@ KEYMAPS(
                     Key_Minus,      Key_LeftCurlyBracket,    Key_LeftBracket,      LSHIFT(Key_9),    Key_Backtick,
                     Key_LeftArrow,  Key_DownArrow,           Key_UpArrow,          Key_RightArrow,   Key_Backslash,
    ___,             ___,            Key_RightCurlyBracket,   Key_RightBracket,     LSHIFT(Key_0),    Key_Equals,
-   ___,             Key_Enter,            ___,                     ___,                  ___,              LockLayer(_MOUSE)
+   ___,             Key_Enter,            ___,                     ___,                  ___,        LockLayer(_MOUSE)
    ),
 
   [_RAISE] = KEYMAP_STACKED
   (
    // Left
-   Key_1,           Key_2,       Key_3,              Key_4,              Key_5,
-   Key_VolDn,       Key_VolUp,   Key_PrevTrack,      Key_PlayPause,      Key_NextTrack,
-   ___,             ___,         ___,                ___,                ___,              Key_LeftShift,
-   ___,             ___,         ___,                ___,                ___,              ___,
+   Key_1,                 Key_2,       Key_3,              Key_4,              Key_5,
+   Key_VolDn,             Key_VolUp,   Key_PrevTrack,      Key_PlayPause,      Key_NextTrack,
+   ___,                   ___,         ___,                ___,                ___,              ___,
+   ShiftToLayer(_FUNCTION),  ___,         ___,                ___,                ___,              ___,
 
    // Right
                     Key_6,       Key_7,              Key_8,              Key_9,            Key_0,
-                    ___,         ___,                ___,                ___,              Key_Equals,
-   ___,             ___,         ___,                ___,                ___,              Key_Plus,
+                    ___,         ___,                ___,                ___,              ___,
+   ___,             ___,         ___,                ___,                ___,              ___,
    ___,             ___,         ___,                ___,                ___,              ___
    ),
 
