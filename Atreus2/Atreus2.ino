@@ -159,13 +159,13 @@ KEYMAPS(
   (
    XXX,     XXX,            XXX,               XXX,               Key_mouseWarpEnd,
    XXX,     XXX,            XXX,               Key_mouseWarpNW,   Key_mouseWarpNE,
-   XXX,     XXX,            XXX,               XXX,               Key_mouseWarpSW,  Key_mouseWarpSE,
+   XXX,     XXX,            XXX,               Key_mouseWarpSW,   Key_mouseWarpSE,  XXX,
    ___,     ___,            ___,               ___,               ___,              ___,
 
-            XXX,            XXX,               XXX,       XXX,              Key_mouseBtnL,
-            Key_mouseL,            Key_mouseDn,        Key_mouseUp,       Key_mouseR,       Key_mouseBtnM,
-   XXX,     XXX,            XXX,               XXX,               XXX,              Key_mouseBtnR,
-   ___,     ___,            ___,               ___,               ___,              MoveToLayer(_QWERTY)
+   XXX,            Key_mouseBtnL,     Key_mouseBtnM,     Key_mouseBtnR,     XXX,
+   Key_mouseL,     Key_mouseDn,       Key_mouseUp,       Key_mouseR,        XXX,
+   XXX,            XXX,               XXX,               XXX,               XXX,    XXX,
+   ___,            ___,               ___,               ___,               ___,    MoveToLayer(_QWERTY)
    )
 )
 /* *INDENT-ON* */
