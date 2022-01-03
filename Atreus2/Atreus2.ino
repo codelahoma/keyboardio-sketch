@@ -173,9 +173,9 @@ KEYMAPS(
   (
    // Left
    Key_F1,           Key_F2,       Key_F3,              Key_F4,              Key_F5,
-   ___,              ___,           ___,                     ___,                  ___,
-   ___,              ___,           ___,                     ___,                  ___,              ___,
-   ___,              ___,           ___,                     ___,                  ___,              ___,
+   ___,              ___,           ___,                ___,                 ___,
+   ___,              ___,           ___,                ___,                 ___,              ___,
+   ___,              ___,           ___,                ___,                 ___,              ___,
 
    // right
    Key_F6,          Key_F7,      Key_F8,             Key_F9,             Key_F10,
@@ -242,12 +242,13 @@ void setup() {
   // Qukeys.setOverlapThreshold(50); // default is 80
   // Qukeys.setHoldTimeout(500); // default is 250
   // no longer need the following mappings because we're using QuKeys helper short-hand functions in KEYMAPS
-  // QUKEYS(
+  QUKEYS(
     // kaleidoscope::plugin::Qukey(0, KeyAddr(2, 5), Key_LeftShift),    // Tab / Shift
-    // kaleidoscope::plugin::Qukey(0, KeyAddr(3, 5), Key_LeftControl),  // Esc / Control
-    // kaleidoscope::plugin::Qukey(0, KeyAddr(3, 6), Key_LeftAlt),      // Home / Alt
+    kaleidoscope::plugin::Qukey(0, KeyAddr(3, 7), Key_LeftControl),  // Esc / Control
+    kaleidoscope::plugin::Qukey(0, KeyAddr(3, 4), Key_LeftAlt),      // Home / Alt
     // kaleidoscope::plugin::Qukey(0, KeyAddr(3, 7), MO(_RAISE)),        // End / ShiftToLayer(Upper)
-  // )
+  )
+
 }
 
 void loop() {
