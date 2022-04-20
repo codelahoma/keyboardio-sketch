@@ -132,12 +132,11 @@ KEYMAPS(
    ___,              ___,           ___,                     ___,                  ___,
    ___,              ___,           ___,                     ___,                  ___,
    ___,              ___,           ___,                     ___,                  ___,              ___,
-   ___,              ___,           ___,                     ___,                  ___,              ___,
 
    // right
-                    Key_Minus,      Key_LeftCurlyBracket,    Key_LeftBracket,      LSHIFT(Key_9),    Key_Backtick,
+                    Key_Minus,      Key_LeftCurlyBracket,    Key_RightCurlyBracket,      Key_LeftBracket,    Key_RightBracket,
                     Key_LeftArrow,  Key_DownArrow,           Key_UpArrow,          Key_RightArrow,   Key_Backslash,
-   ___,             ___,            Key_RightCurlyBracket,   Key_RightBracket,     LSHIFT(Key_0),    Key_Equals,
+   Key_Equals,      LSHIFT(Key_9),  LSHIFT(Key_8),           ___,     ___,    Key_Equals,
    ___,             Key_Enter,            ___,                     ___,                  ___,        LockLayer(_MOUSE)
    ),
 
