@@ -68,7 +68,10 @@ enum {
 #define Key_Caret LSHIFT(Key_6)
 #define Key_And LSHIFT(Key_7)
 #define Key_Star LSHIFT(Key_8)
+#define Key_LeftParen LSHIFT(Key_9)
+#define Key_RightParen LSHIFT(Key_0)
 #define Key_Plus LSHIFT(Key_Equals)
+#define Key_Underscore LSHIFT(Key_Minus)
 
 #define Key_PrevTrack Consumer_ScanPreviousTrack
 #define Key_NextTrack Consumer_ScanNextTrack
@@ -104,6 +107,9 @@ enum {
   _RAISE,
   _MOUSE,
   _FUNCTION,
+  _PUNCNUMB,
+  _SNAKECASE,
+  _EMPTY
 };
 
 #define Key_MyHyper LCTRL(LALT(LSHIFT(Key_LeftGui)))
@@ -118,12 +124,12 @@ KEYMAPS(
    Key_Q,              Key_W,         Key_E,            Key_R,         Key_T,
    Key_A,              Key_S,         Key_D,            Key_F,         Key_G,
    Key_Z,              Key_X,         Key_C,            Key_V,         Key_B,         Key_Tab,
-   OSL(_LOWER),        OSM(LeftAlt),  Key_Magic,      Key_Esc,       Key_BSpc,      OSM(LeftControl),
+   OSL(_LOWER),        OSM(LeftAlt),  LockLayer(_SNAKECASE),      Key_Esc,       Key_BSpc,      OSM(LeftShift),
 
                        Key_Y,         Key_U,            Key_I,         Key_O,         Key_P,
                        Key_H,         Key_J,            Key_K,         Key_L,         Key_Semicolon,
    Key_Enter,          Key_N,         Key_M,            Key_Comma,     Key_Period,    Key_Slash,
-   OSM(LeftShift),     Key_Space,     OSM(LeftGui),     Key_Minus,     Key_Quote,     OSL(_RAISE)
+   OSM(LeftShift),     Key_Space,     OSM(LeftControl),     Key_Minus,     Key_Quote,     OSL(_FUNCTION)
   ),
 
   [_LOWER] = KEYMAP_STACKED
@@ -132,25 +138,26 @@ KEYMAPS(
    ___,              ___,           ___,                     ___,                  ___,
    ___,              ___,           ___,                     ___,                  ___,
    ___,              ___,           ___,                     ___,                  ___,              ___,
+   ___,              ___,           ___,                     ___,                  ___,              ___,
 
    // right
                     Key_Minus,      Key_LeftCurlyBracket,    Key_RightCurlyBracket,      Key_LeftBracket,    Key_RightBracket,
                     Key_LeftArrow,  Key_DownArrow,           Key_UpArrow,          Key_RightArrow,   Key_Backslash,
-   Key_Equals,      LSHIFT(Key_9),  LSHIFT(Key_8),           ___,     ___,    Key_Equals,
+   ___,             LSHIFT(Key_Equals),      LSHIFT(Key_9),  LSHIFT(Key_0),        Key_Backtick,              Key_Equals,
    ___,             Key_Enter,            ___,                     ___,                  ___,        LockLayer(_MOUSE)
    ),
 
   [_RAISE] = KEYMAP_STACKED
   (
    // Left
-   Key_1,                 Key_2,       Key_3,              Key_4,              Key_5,
-   Key_VolDn,             Key_VolUp,   Key_PrevTrack,      Key_PlayPause,      Key_NextTrack,
-   ___,                   ___,         ___,                ___,                ___,              ___,
-   ShiftToLayer(_FUNCTION),  ___,         ___,                ___,                ___,              ___,
+   Key_F1,           Key_F2,       Key_F3,              Key_F4,              Key_F5,
+   Key_VolDn,        Key_VolUp,    Key_PrevTrack,       Key_PlayPause,       Key_NextTrack,
+   ___,              ___,          ___,                 ___,                 Key_Home,        Key_PageUp,
+   ___,              ___,          ___,                 ___,                 Key_End,         Key_PageDown,
 
    // Right
-                    Key_6,       Key_7,              Key_8,              Key_9,            Key_0,
-                    ___,         ___,                ___,                ___,              ___,
+                    Key_F6,          Key_F7,      Key_F8,             Key_F9,             Key_F10,
+                    Key_F11,         Key_F12,     Key_F13,            Key_F14,            Key_F15,
    ___,             ___,         ___,                ___,                ___,              ___,
    ___,             ___,         ___,                ___,                ___,              ___
    ),
@@ -165,7 +172,7 @@ KEYMAPS(
    XXX,            Key_mouseBtnL,     Key_mouseBtnM,     Key_mouseBtnR,     XXX,
    Key_mouseL,     Key_mouseDn,       Key_mouseUp,       Key_mouseR,        XXX,
    XXX,            XXX,               XXX,               XXX,               XXX,    XXX,
-   ___,            ___,               ___,               ___,               ___,    MoveToLayer(_QWERTY)
+   ___,            ___,               ___,               ___,               ___,    ___
    ),
 
   [_FUNCTION] = KEYMAP_STACKED
@@ -177,12 +184,60 @@ KEYMAPS(
    ___,              ___,           ___,                ___,                 ___,              ___,
 
    // right
-   Key_F6,          Key_F7,      Key_F8,             Key_F9,             Key_F10,
-   Key_F11,         Key_F12,     Key_F13,            Key_F14,            Key_F15,
+                    Key_F6,          Key_F7,      Key_F8,             Key_F9,             Key_F10,
+                    Key_F11,         Key_F12,     Key_F13,            Key_F14,            Key_F15,
    ___,             ___,         ___,                ___,                ___,              ___,
    ___,             ___,         ___,                ___,                ___,              ___
+   ),
+
+  [_PUNCNUMB] = KEYMAP_STACKED
+  (
+   // Left
+   Key_1,              Key_2,           Key_3,                Key_4,                 Key_5,
+   Key_Exclamation,    Key_At,          Key_Hash,             Key_Dollar,            Key_Percent,
+   XXX,                XXX,             XXX,                  LSHIFT(Key_Quote),     Key_Quote,        Key_Backtick,
+   XXX,                XXX,             XXX,                  XXX,                   XXX,              XXX,
+
+   // right
+                     Key_6,             Key_7,                Key_8,                Key_9,               Key_0,
+                     Key_Caret,         Key_And,              Key_Star,             Key_LeftParen,       Key_RightParen,
+   XXX,              Key_Minus,         Key_Underscore,       XXX,                  XXX,                 XXX,
+   XXX,              XXX,               XXX,                  XXX,                  XXX,                 XXX
+   ),
+
+  [_SNAKECASE] = KEYMAP_STACKED
+  (
+   // Left
+   ___,              ___,           ___,                ___,                 ___,
+   ___,              ___,           ___,                ___,                 ___,
+   ___,                ___,             ___,                  ___,                   ___,              ___,
+   ___,                ___,             ___,                  ___,                   ___,              ___,
+
+   // right
+                     ___,             ___,    ___,   ___,   ___,
+                     ___,   ___,          ___,                     ___,               ___,
+   ___,              ___,             ___,                     ___,                     ___,               ___,
+   ___,              Key_Underscore,  ___,                     ___,                     ___,               ___
    )
+
 )
+/*
+  [_EMPTY] = KEYMAP_STACKED
+  (
+  // Left
+  ___,              ___,           ___,                ___,                 ___,
+  ___,              ___,           ___,                ___,                 ___,
+  ___,              ___,           ___,                ___,                 ___,              ___,
+  ___,              ___,           ___,                ___,                 ___,              ___,
+
+  // right
+                    ___,           ___,                ___,                ___,               ___,
+                    ___,           ___,                ___,                ___,               ___,
+  ___,              ___,           ___,                ___,                ___,               ___,
+  ___,              ___,           ___,                ___,                ___,               ___,
+  )
+
+ */
 /* *INDENT-ON* */
 
 const macro_t *macroAction(uint8_t macroIndex, uint8_t keyState) {
@@ -238,16 +293,25 @@ void setup() {
     * For the Keyboardio Atreus 2, key coordinates refer to this header file:
     * https://github.com/keyboardio/Kaleidoscope/blob/d7e0f49fef92b6f516c991a927ddac79b44fbd5d/src/kaleidoscope/device/keyboardio/Atreus2.h
   */
-  // Qukeys.setOverlapThreshold(50); // default is 80
+  Qukeys.setOverlapThreshold(100); // default is 80
   // Qukeys.setHoldTimeout(500); // default is 250
-  // no longer need the following mappings because we're using QuKeys helper short-hand functions in KEYMAPS
   QUKEYS(
-    // kaleidoscope::plugin::Qukey(0, KeyAddr(2, 5), Key_LeftShift),    // Tab / Shift
-    kaleidoscope::plugin::Qukey(0, KeyAddr(3, 7), Key_LeftControl),  // Esc / Control
-    kaleidoscope::plugin::Qukey(0, KeyAddr(3, 4), Key_LeftAlt),      // Home / Alt
-    // kaleidoscope::plugin::Qukey(0, KeyAddr(3, 7), MO(_RAISE)),        // End / ShiftToLayer(Upper)
+    kaleidoscope::plugin::Qukey(0, KeyAddr(1, 0), Key_MyHyper),      // A / Hyper
+    kaleidoscope::plugin::Qukey(0, KeyAddr(1, 1), ShiftToLayer(_PUNCNUMB)),      // S / Punctuation
+    kaleidoscope::plugin::Qukey(0, KeyAddr(1, 10), ShiftToLayer(_PUNCNUMB)),      // L / Punctuation
+    kaleidoscope::plugin::Qukey(0, KeyAddr(1, 11), Key_MyHyper),      // ; / Hyper
+    kaleidoscope::plugin::Qukey(0, KeyAddr(1, 2), ShiftToLayer(_LOWER)),      // S / Punctuation
+    kaleidoscope::plugin::Qukey(0, KeyAddr(1, 3), Key_LeftGui),      // F / Command
+    kaleidoscope::plugin::Qukey(0, KeyAddr(1, 4), Key_LeftAlt),      // G / Option
+    kaleidoscope::plugin::Qukey(0, KeyAddr(1, 7), Key_LeftAlt),      // H / Option
+    kaleidoscope::plugin::Qukey(0, KeyAddr(1, 8), Key_LeftGui),      // J / Command
+    kaleidoscope::plugin::Qukey(0, KeyAddr(1, 9), ShiftToLayer(_RAISE)),      // J / Command
+    kaleidoscope::plugin::Qukey(0, KeyAddr(2, 3), Key_Magic),      // V / Magic
+    kaleidoscope::plugin::Qukey(0, KeyAddr(2, 4), Key_CommandShift),      // B / CommandShift
+    kaleidoscope::plugin::Qukey(0, KeyAddr(2, 7), Key_CommandShift),      // N / CommandShift
+    kaleidoscope::plugin::Qukey(0, KeyAddr(2, 8), Key_Magic),      // M / Magic
+    kaleidoscope::plugin::Qukey(0, KeyAddr(3, 3), Key_LeftControl),  // Esc / Control
   )
-
 }
 
 void loop() {
