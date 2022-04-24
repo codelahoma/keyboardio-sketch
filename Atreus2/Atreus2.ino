@@ -109,6 +109,7 @@ enum {
   _FUNCTION,
   _PUNCNUMB,
   _SNAKECASE,
+  _NUMPAD,
   _EMPTY
 };
 
@@ -124,12 +125,12 @@ KEYMAPS(
    Key_Q,              Key_W,         Key_E,            Key_R,         Key_T,
    Key_A,              Key_S,         Key_D,            Key_F,         Key_G,
    Key_Z,              Key_X,         Key_C,            Key_V,         Key_B,         Key_Tab,
-   OSL(_LOWER),        OSM(LeftAlt),  LockLayer(_SNAKECASE),      Key_Esc,       Key_BSpc,      OSM(LeftShift),
+   OSL(_FUNCTION),        OSM(LeftAlt),  LockLayer(_SNAKECASE),      Key_Esc,       Key_BSpc,      OSM(LeftShift),
 
                        Key_Y,         Key_U,            Key_I,         Key_O,         Key_P,
                        Key_H,         Key_J,            Key_K,         Key_L,         Key_Semicolon,
    Key_Enter,          Key_N,         Key_M,            Key_Comma,     Key_Period,    Key_Slash,
-   OSM(LeftShift),     Key_Space,     OSM(LeftControl),     Key_Minus,     Key_Quote,     OSL(_FUNCTION)
+   OSM(LeftShift),     Key_Space,     OSM(LeftControl),     Key_Minus,     Key_Quote,     OSL(_MOUSE)
   ),
 
   [_LOWER] = KEYMAP_STACKED
@@ -144,20 +145,20 @@ KEYMAPS(
                     Key_Minus,      Key_LeftCurlyBracket,    Key_RightCurlyBracket,      Key_LeftBracket,    Key_RightBracket,
                     Key_LeftArrow,  Key_DownArrow,           Key_UpArrow,          Key_RightArrow,   Key_Backslash,
    ___,             LSHIFT(Key_Equals),      LSHIFT(Key_9),  LSHIFT(Key_0),        Key_Backtick,              Key_Equals,
-   ___,             Key_Enter,            ___,                     ___,                  ___,        LockLayer(_MOUSE)
+   ___,             Key_Enter,            ___,                     ___,                  ___,        ___
    ),
 
   [_RAISE] = KEYMAP_STACKED
   (
    // Left
-   Key_F1,           Key_F2,       Key_F3,              Key_F4,              Key_F5,
+   ___,           ___,       ___,              ___,              ___,
    Key_VolDn,        Key_VolUp,    Key_PrevTrack,       Key_PlayPause,       Key_NextTrack,
    ___,              ___,          ___,                 ___,                 Key_Home,        Key_PageUp,
    ___,              ___,          ___,                 ___,                 Key_End,         Key_PageDown,
 
    // Right
-                    Key_F6,          Key_F7,      Key_F8,             Key_F9,             Key_F10,
-                    Key_F11,         Key_F12,     Key_F13,            Key_F14,            Key_F15,
+                    ___,          ___,      ___,             ___,             ___,
+                    ___,         ___,     ___,            ___,            ___,
    ___,             ___,         ___,                ___,                ___,              ___,
    ___,             ___,         ___,                ___,                ___,              ___
    ),
@@ -196,12 +197,12 @@ KEYMAPS(
    Key_1,              Key_2,           Key_3,                Key_4,                 Key_5,
    Key_Exclamation,    Key_At,          Key_Hash,             Key_Dollar,            Key_Percent,
    XXX,                XXX,             XXX,                  LSHIFT(Key_Quote),     Key_Quote,        Key_Backtick,
-   XXX,                XXX,             XXX,                  XXX,                   XXX,              XXX,
+   Key_Equals,         XXX,             XXX,                  XXX,                   XXX,              XXX,
 
    // right
                      Key_6,             Key_7,                Key_8,                Key_9,               Key_0,
                      Key_Caret,         Key_And,              Key_Star,             Key_LeftParen,       Key_RightParen,
-   XXX,              Key_Minus,         Key_Underscore,       XXX,                  XXX,                 XXX,
+   XXX,              Key_Minus,         Key_Underscore,       XXX,                  XXX,                 Key_Backslash,
    XXX,              XXX,               XXX,                  XXX,                  XXX,                 XXX
    ),
 
@@ -218,26 +219,38 @@ KEYMAPS(
                      ___,   ___,          ___,                     ___,               ___,
    ___,              ___,             ___,                     ___,                     ___,               ___,
    ___,              Key_Underscore,  ___,                     ___,                     ___,               ___
-   )
+   ),
 
-)
-/*
+  [_NUMPAD] = KEYMAP_STACKED
+  (
+   // Left
+   ___,              ___,           ___,                ___,                 ___,
+   ___,              ___,           ___,                ___,                 ___,
+   ___,              ___,           ___,                ___,                 ___,              ___,
+   ___,              ___,           ___,                ___,                 ___,              ___,
+
+   // right
+   /*            */  ___,           Key_7,                Key_8,                Key_9,               Key_Star,
+   /*            */  ___,           Key_4,                Key_5,                Key_6,               Key_Plus,
+   ___,              ___,           Key_1,                Key_2,                Key_3,               Key_Slash,
+   ___,              ___,           ___,                  ___,                  Key_0,               Key_Equals
+   ),
+
   [_EMPTY] = KEYMAP_STACKED
   (
   // Left
-  ___,              ___,           ___,                ___,                 ___,
-  ___,              ___,           ___,                ___,                 ___,
-  ___,              ___,           ___,                ___,                 ___,              ___,
-  ___,              ___,           ___,                ___,                 ___,              ___,
+    ___,              ___,           ___,                ___,                 ___,
+    ___,              ___,           ___,                ___,                 ___,
+    ___,              ___,           ___,                ___,                 ___,              ___,
+    ___,              ___,           ___,                ___,                 ___,              ___,
 
-  // right
-                    ___,           ___,                ___,                ___,               ___,
-                    ___,           ___,                ___,                ___,               ___,
-  ___,              ___,           ___,                ___,                ___,               ___,
-  ___,              ___,           ___,                ___,                ___,               ___,
+  // Right
+    /*            */  ___,           ___,                ___,                ___,               ___,
+    /*            */  ___,           ___,                ___,                ___,               ___,
+    ___,              ___,           ___,                ___,                ___,               ___,
+    ___,              ___,           ___,                ___,                ___,               ___
   )
-
- */
+)
 /* *INDENT-ON* */
 
 const macro_t *macroAction(uint8_t macroIndex, uint8_t keyState) {
@@ -306,6 +319,7 @@ void setup() {
     kaleidoscope::plugin::Qukey(0, KeyAddr(1, 7), Key_LeftAlt),      // H / Option
     kaleidoscope::plugin::Qukey(0, KeyAddr(1, 8), Key_LeftGui),      // J / Command
     kaleidoscope::plugin::Qukey(0, KeyAddr(1, 9), ShiftToLayer(_RAISE)),      // J / Command
+    kaleidoscope::plugin::Qukey(0, KeyAddr(2, 2), ShiftToLayer(_NUMPAD)),      // C / Numpad
     kaleidoscope::plugin::Qukey(0, KeyAddr(2, 3), Key_Magic),      // V / Magic
     kaleidoscope::plugin::Qukey(0, KeyAddr(2, 4), Key_CommandShift),      // B / CommandShift
     kaleidoscope::plugin::Qukey(0, KeyAddr(2, 7), Key_CommandShift),      // N / CommandShift
