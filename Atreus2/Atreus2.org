@@ -1,0 +1,64 @@
+#+NAME: QWERTY
+| Q             | W           | E                    | R   | T    |               |               | Y     | U               | I     | O      | P          |
+| A             | S           | D                    | F   | G    |               |               | H     | J               | K     | L      | Semicolon  |
+| Z             | X           | C                    | V   | B    | Tab           | Enter         | N     | M               | Comma | Period | Slash      |
+| OSL:_FUNCTION | OSM:LeftAlt | LockLayer:_SNAKECASE | Esc | BSpc | OSM:LeftShift | OSM:LeftShift | Space | OSM:LeftControl | Minus | Quote  | OSL:_MOUSE |
+
+#+NAME: FUNCTION
+|               | W           | E                    | R   | T    |               |               | Y     | U               | I     | O      | P          |
+| A             | S           | D                    | F   | G    |               |               | H     | J               | K     | L      | Semicolon  |
+| Z             | X           | C                    | V   | B    | Tab           | Enter         | N     | M               | Comma | Period | Slash      |
+| OSL:_FUNCTION | OSM:LeftAlt | LockLayer:_SNAKECASE | Esc | BSpc | OSM:LeftShift | OSM:LeftShift | Space | OSM:LeftControl | Minus | Quote  | OSL:_MOUSE |
+
+#+name: output_map
+#+begin_src python :var title="_QWERTY" :var keys=QWERTY :results output raw
+  left_rows = []
+  right_rows = []
+  left_keys_out = ""
+  right_keys_out = ""
+
+  def parse_key(key):
+      if key == "":
+          return None
+      if ":" in key:
+          function, args = key.split(":")
+          return f"{function}({args}), "
+      return f"Key_{key}, "
+
+  for row in keys:
+      for idx, key in enumerate(row):
+          parsed_key = parse_key(key)
+          if parsed_key is not None:
+              if idx < 6:
+                  left_keys_out += parsed_key
+              else:
+                  right_keys_out += parsed_key
+      left_keys_out += "\n"
+      right_keys_out += "\n"
+
+  print(f"[{title}] = KEYMAP_STACKED\n(")
+  print(f"// Left\n{left_keys_out}// Right\n{right_keys_out}")
+  print(")")
+#+end_src
+
+#+RESULTS: output_map
+[_QWERTY] = KEYMAP_STACKED
+(
+// Left
+Key_Q, Key_W, Key_E, Key_R, Key_T, 
+Key_A, Key_S, Key_D, Key_F, Key_G, 
+Key_Z, Key_X, Key_C, Key_V, Key_B, Key_Tab, 
+OSL(_FUNCTION), OSM(LeftAlt), LockLayer(_SNAKECASE), Key_Esc, Key_BSpc, OSM(LeftShift), 
+// Right
+Key_Y, Key_U, Key_I, Key_O, Key_P, 
+Key_H, Key_J, Key_K, Key_L, Key_Semicolon, 
+Key_Enter, Key_N, Key_M, Key_Comma, Key_Period, Key_Slash, 
+OSM(LeftShift), Key_Space, OSM(LeftControl), Key_Minus, Key_Quote, OSL(_MOUSE), 
+
+)
+
+#+RESULTS:
+
+#+call: output_map(keys=FUNCTION, title="_FUNCTION")
+
+#+RESULTS:
