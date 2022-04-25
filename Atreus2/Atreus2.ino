@@ -142,10 +142,10 @@ KEYMAPS(
    ___,              ___,           ___,                     ___,                  ___,              ___,
 
    // right
-                    Key_Minus,      Key_LeftCurlyBracket,    Key_RightCurlyBracket,      Key_LeftBracket,    Key_RightBracket,
-                    Key_LeftArrow,  Key_DownArrow,           Key_UpArrow,          Key_RightArrow,   Key_Backslash,
-   ___,             LSHIFT(Key_Equals),      LSHIFT(Key_9),  LSHIFT(Key_0),        Key_Backtick,              Key_Equals,
-   ___,             Key_Enter,            ___,                     ___,                  ___,        ___
+                    Key_Minus,      Key_LeftCurlyBracket,    Key_RightCurlyBracket,   Key_LeftBracket,  Key_RightBracket,
+                    Key_LeftArrow,  Key_DownArrow,           Key_UpArrow,             Key_RightArrow,   Key_Backslash,
+   ___,             Key_Plus,       Key_LeftParen,           Key_RightParen,          Key_Backtick,     Key_Equals,
+   ___,             Key_Enter,      ___,                     ___,                     ___,              ___
    ),
 
   [_RAISE] = KEYMAP_STACKED
@@ -202,7 +202,7 @@ KEYMAPS(
    // right
                      Key_6,             Key_7,                Key_8,                Key_9,               Key_0,
                      Key_Caret,         Key_And,              Key_Star,             Key_LeftParen,       Key_RightParen,
-   XXX,              Key_Minus,         Key_Underscore,       XXX,                  XXX,                 Key_Backslash,
+   XXX,              Key_Minus,         Key_Underscore,       Key_Plus,                  XXX,                 Key_Backslash,
    XXX,              XXX,               XXX,                  XXX,                  XXX,                 XXX
    ),
 
