@@ -125,7 +125,7 @@ KEYMAPS(
    Key_Q,              Key_W,         Key_E,            Key_R,         Key_T,
    Key_A,              Key_S,         Key_D,            Key_F,         Key_G,
    Key_Z,              Key_X,         Key_C,            Key_V,         Key_B,         Key_Tab,
-   OSL(_FUNCTION),        OSM(LeftAlt),  LockLayer(_SNAKECASE),      Key_Esc,       Key_BSpc,      OSM(LeftShift),
+   OSL(_FUNCTION),        OSM(LeftAlt),  OSL(_SNAKECASE),      Key_Esc,       Key_BSpc,      OSM(LeftShift),
 
                        Key_Y,         Key_U,            Key_I,         Key_O,         Key_P,
                        Key_H,         Key_J,            Key_K,         Key_L,         Key_Semicolon,
@@ -197,13 +197,13 @@ KEYMAPS(
    Key_1,              Key_2,           Key_3,                Key_4,                 Key_5,
    Key_Exclamation,    Key_At,          Key_Hash,             Key_Dollar,            Key_Percent,
    XXX,                XXX,             XXX,                  LSHIFT(Key_Quote),     Key_Quote,        Key_Backtick,
-   Key_Equals,         XXX,             XXX,                  XXX,                   XXX,              XXX,
+   Key_Equals,         XXX,             XXX,                  XXX,                   ___,              XXX,
 
    // right
                      Key_6,             Key_7,                Key_8,                Key_9,               Key_0,
                      Key_Caret,         Key_And,              Key_Star,             Key_LeftParen,       Key_RightParen,
    XXX,              Key_Minus,         Key_Underscore,       Key_Plus,                  XXX,                 Key_Backslash,
-   XXX,              XXX,               XXX,                  XXX,                  XXX,                 XXX
+   XXX,              ___,               XXX,                  XXX,                  XXX,                 XXX
    ),
 
   [_SNAKECASE] = KEYMAP_STACKED
