@@ -28,7 +28,6 @@
 #include "Kaleidoscope-MouseKeys.h"
 #include "Kaleidoscope-OneShot.h"
 #include "Kaleidoscope-Qukeys.h"
-#include "Kaleidoscope-ShapeShifter.h"
 #include "Kaleidoscope-Escape-OneShot.h"
 
 /* -*- mode: c++ -*-
@@ -283,7 +282,6 @@ KALEIDOSCOPE_INIT_PLUGINS(
                           Qukeys,
                           OneShot,
                           EscapeOneShot,
-                          ShapeShifter,
                           MouseKeys,
                           Macros
                           );
