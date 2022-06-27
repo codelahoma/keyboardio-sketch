@@ -151,7 +151,7 @@ KEYMAPS(
   [_RAISE] = KEYMAP_STACKED
   (
    // Left
-   ___,           ___,       ___,              ___,              ___,
+   ___,           ___,       ___,              ___,              LGUI(Key_Backtick),
    Key_VolDn,        Key_VolUp,    Key_PrevTrack,       Key_PlayPause,       Key_NextTrack,
    ___,              ___,          ___,                 ___,                 Key_Home,        Key_PageUp,
    ___,              ___,          ___,                 ___,                 Key_End,         Key_PageDown,
