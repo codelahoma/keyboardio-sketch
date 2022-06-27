@@ -71,6 +71,7 @@ enum {
 #define Key_RightParen LSHIFT(Key_0)
 #define Key_Plus LSHIFT(Key_Equals)
 #define Key_Underscore LSHIFT(Key_Minus)
+#define Key_Colon LSHIFT(Key_Semicolon)
 
 #define Key_PrevTrack Consumer_ScanPreviousTrack
 #define Key_NextTrack Consumer_ScanNextTrack
@@ -229,10 +230,10 @@ KEYMAPS(
    ___,              ___,           ___,                ___,                 ___,              ___,
 
    // right
-   /*            */  ___,           Key_7,                Key_8,                Key_9,               Key_Star,
-   /*            */  ___,           Key_4,                Key_5,                Key_6,               Key_Plus,
-   ___,              ___,           Key_1,                Key_2,                Key_3,               Key_Slash,
-   ___,              ___,           ___,                  ___,                  Key_0,               Key_Equals
+   /*            */  ___,           Key_7,                Key_8,                Key_9,               Key_0,
+   /*            */  ___,           Key_4,                Key_5,                Key_6,               Key_Colon,
+   ___,              ___,           Key_1,                Key_2,                Key_3,               ___,
+   ___,              ___,           ___,                  ___,                  Key_0,               ___
    ),
 
   [_EMPTY] = KEYMAP_STACKED
