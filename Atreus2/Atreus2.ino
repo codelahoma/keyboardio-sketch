@@ -108,7 +108,6 @@ enum {
   _MOUSE,
   _FUNCTION,
   _PUNCNUMB,
-  _SNAKECASE,
   _NUMPAD,
   _EMPTY
 };
@@ -202,23 +201,8 @@ KEYMAPS(
    // right
                      Key_6,             Key_7,                Key_8,                Key_9,               Key_0,
                      Key_Caret,         Key_And,              Key_Star,             Key_LeftParen,       Key_RightParen,
-   XXX,              Key_Minus,         Key_Underscore,       Key_Plus,                  XXX,                 Key_Backslash,
-   XXX,              ___,               XXX,                  XXX,                  XXX,                 XXX
-   ),
-
-  [_SNAKECASE] = KEYMAP_STACKED
-  (
-   // Left
-   ___,              ___,           ___,                ___,                 ___,
-   ___,              ___,           ___,                ___,                 ___,
-   ___,                ___,             ___,                  ___,                   ___,              ___,
-   ___,                ___,             ___,                  ___,                   ___,              ___,
-
-   // right
-                     ___,             ___,    ___,   ___,   ___,
-                     ___,   ___,          ___,                     ___,               ___,
-   ___,              ___,             ___,                     ___,                     ___,               ___,
-   ___,              Key_Underscore,  ___,                     ___,                     ___,               ___
+   XXX,              Key_Minus,         Key_Underscore,       Key_Plus,             Key_Backtick,        Key_Backslash,
+   XXX,              ___,               XXX,                  XXX,                  XXX,                 LSHIFT(Key_Backslash)
    ),
 
   [_NUMPAD] = KEYMAP_STACKED
