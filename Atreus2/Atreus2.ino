@@ -260,11 +260,11 @@ const macro_t *macroAction(uint8_t macroIndex, uint8_t keyState) {
 }
 
 KALEIDOSCOPE_INIT_PLUGINS(
+                          Qukeys,
                           EEPROMSettings,
                           Focus,
                           FocusEEPROMCommand,
                           FocusSettingsCommand,
-                          Qukeys,
                           OneShot,
                           EscapeOneShot,
                           MouseKeys,
@@ -290,7 +290,9 @@ void setup() {
     * https://github.com/keyboardio/Kaleidoscope/blob/d7e0f49fef92b6f516c991a927ddac79b44fbd5d/src/kaleidoscope/device/keyboardio/Atreus2.h
   */
   Qukeys.setOverlapThreshold(100); // default is 80
+  // Qukeys.setMinimumHoldTime(100); // default is 50
   // Qukeys.setHoldTimeout(500); // default is 250
+  Qukeys.setMaxIntervalForTapRepeat(0);
   QUKEYS(
     kaleidoscope::plugin::Qukey(0, KeyAddr(1, 0), Key_MyHyper),      // A / Hyper
     kaleidoscope::plugin::Qukey(0, KeyAddr(1, 1), ShiftToLayer(_PUNCNUMB)),      // S / Punctuation
@@ -308,7 +310,7 @@ void setup() {
     kaleidoscope::plugin::Qukey(0, KeyAddr(2, 7), Key_CommandShift),      // N / CommandShift
     kaleidoscope::plugin::Qukey(0, KeyAddr(2, 8), Key_Magic),      // M / Magic
     kaleidoscope::plugin::Qukey(0, KeyAddr(3, 3), Key_LeftControl),  // Esc / Control
-  )
+         )
 }
 
 void loop() {
