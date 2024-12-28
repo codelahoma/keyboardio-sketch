@@ -116,6 +116,7 @@ enum {
 #define Key_MyHyper LCTRL(LALT(LSHIFT(Key_LeftGui)))
 #define Key_Magic LCTRL(LALT(Key_LeftGui))
 #define Key_CommandShift LSHIFT(Key_LeftGui)
+#define Key_Meh LCTRL(LALT(Key_LeftShift))
 
 
 /* *INDENT-OFF* */
@@ -125,7 +126,7 @@ KEYMAPS(
    Key_Q,              Key_W,         Key_E,            Key_R,         Key_T,
    Key_A,              Key_S,         Key_D,            Key_F,         Key_G,
    Key_Z,              Key_X,         Key_C,            Key_V,         Key_B,         Key_Tab,
-   OSL(_NUMPAD),        OSL(_MOUSE),  OSM(LeftGui),      Key_Esc,       Key_BSpc,      OSM(LeftShift),
+   OSL(_NUMPAD),        OSL(_MOUSE),  OSM(LeftGui),      Key_Esc,       Key_BSpc,      OSM(LeftAlt),
 
                        Key_Y,         Key_U,            Key_I,         Key_O,         Key_P,
                        Key_H,         Key_J,            Key_K,         Key_L,         Key_Semicolon,
@@ -142,16 +143,16 @@ KEYMAPS(
    ___,              ___,           ___,                     ___,                  ___,              ___,
 
    // right
-                    Key_Minus,      Key_LeftCurlyBracket,    Key_RightCurlyBracket,   Key_LeftBracket,  Key_RightBracket,
+   Key_Minus,      Key_LeftCurlyBracket,    Key_RightCurlyBracket,   Key_LeftBracket,  Key_RightBracket,
                     Key_LeftArrow,  Key_DownArrow,           Key_UpArrow,             Key_RightArrow,   Key_Backslash,
    ___,             Key_Plus,       Key_Tilde,               Key_RightParen,          Key_Backtick,     Key_Equals,
-   ___,             Key_Enter,      ___,                     ___,                     Key_Tilde,              ___
+   ___,             ___,      ___,                     ___,                     Key_Tilde,              ___
    ),
 
   [_RAISE] = KEYMAP_STACKED
   (
    // Left
-   ___,           ___,       ___,              ___,              LGUI(Key_Backtick),
+   ___,           ___,       M(MACRO_VERSION_INFO),         /*Alfred hotkey*/ LGUI(LSHIFT(Key_Space)),              LGUI(Key_Backtick),
    Key_VolDn,        Key_VolUp,    Key_PrevTrack,       Key_PlayPause,       Key_NextTrack,
    ___,              ___,          ___,                 ___,                 Key_Home,        Key_PageUp,
    ___,              ___,          ___,                 ___,                 Key_End,         Key_PageDown,
@@ -180,13 +181,13 @@ KEYMAPS(
   (
    // Left
    Key_F1,           Key_F2,       Key_F3,              Key_F4,              Key_F5,
-   ___,              ___,           ___,                ___,                 ___,
-   ___,              ___,           ___,                ___,                 ___,              ___,
+   Key_F11,         Key_F12,     Key_F13,            Key_F14,            Key_F15,
+   Key_F21,         Key_F22,     Key_F23,            Key_F24,                 ___,              ___,
    ___,              ___,           ___,                ___,                 ___,              ___,
 
    // right
                     Key_F6,          Key_F7,      Key_F8,             Key_F9,             Key_F10,
-                    Key_F11,         Key_F12,     Key_F13,            Key_F14,            Key_F15,
+                    Key_F16,         Key_F17,     Key_F18,            Key_F19,            Key_F20,
    ___,             ___,         ___,                ___,                ___,              ___,
    ___,             ___,         ___,                ___,                ___,              ___
    ),
@@ -248,10 +249,8 @@ const macro_t *macroAction(uint8_t macroIndex, uint8_t keyState) {
     Layer.move(_QWERTY);
     break;
   case MACRO_VERSION_INFO:
-    if (keyToggledOn(keyState)) {
-      Macros.type(PSTR("Keyboardio Atreus - Kaleidoscope "));
-      Macros.type(PSTR(BUILD_INFORMATION));
-    }
+    Macros.type(PSTR("Keyboardio Atreus - Kaleidoscope "));
+    Macros.type(PSTR(BUILD_INFORMATION));
     break;
   default:
     break;
@@ -277,7 +276,7 @@ void setup() {
 
   OneShot.enableAutoModifiers();
 
-  MouseWrapper.speedLimit = 128;
+  // MouseWrapper.speedLimit = 128;
   MouseKeys.speed = 10;
   MouseKeys.accelDelay = 35;
 
@@ -295,6 +294,8 @@ void setup() {
   // Qukeys.setHoldTimeout(500); // default is 250
   Qukeys.setMaxIntervalForTapRepeat(0);
   QUKEYS(
+    kaleidoscope::plugin::Qukey(0, KeyAddr(0, 3), Key_Meh),      // R/ Meh 
+    kaleidoscope::plugin::Qukey(0, KeyAddr(0, 8), Key_Meh),      // U / Meh
     kaleidoscope::plugin::Qukey(0, KeyAddr(1, 0), Key_MyHyper),      // A / Hyper
     kaleidoscope::plugin::Qukey(0, KeyAddr(1, 1), ShiftToLayer(_PUNCNUMB)),      // S / Punctuation
     kaleidoscope::plugin::Qukey(0, KeyAddr(1, 10), ShiftToLayer(_PUNCNUMB)),      // L / Punctuation
@@ -304,7 +305,7 @@ void setup() {
     kaleidoscope::plugin::Qukey(0, KeyAddr(1, 4), Key_LeftAlt),      // G / Option
     kaleidoscope::plugin::Qukey(0, KeyAddr(1, 7), Key_LeftAlt),      // H / Option
     kaleidoscope::plugin::Qukey(0, KeyAddr(1, 8), Key_LeftGui),      // J / Command
-    kaleidoscope::plugin::Qukey(0, KeyAddr(1, 9), ShiftToLayer(_RAISE)),      // J / Command
+    kaleidoscope::plugin::Qukey(0, KeyAddr(1, 9), ShiftToLayer(_RAISE)),      // K / Media + Misc
     kaleidoscope::plugin::Qukey(0, KeyAddr(2, 2), ShiftToLayer(_NUMPAD)),      // C / Numpad
     kaleidoscope::plugin::Qukey(0, KeyAddr(2, 3), Key_Magic),      // V / Magic
     kaleidoscope::plugin::Qukey(0, KeyAddr(2, 4), Key_CommandShift),      // B / CommandShift
