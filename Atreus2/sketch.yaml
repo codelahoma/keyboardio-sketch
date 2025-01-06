@@ -1,0 +1,2 @@
+default_port: /dev/cu.usbmodemCDatreus1n
+default_fqbn: keyboardio:avr:atreus2

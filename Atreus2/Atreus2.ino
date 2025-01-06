@@ -110,6 +110,7 @@ enum {
   _FUNCTION,
   _PUNCNUMB,
   _NUMPAD,
+  _BALANCED_SYMBOLS,
   _EMPTY
 };
 
@@ -121,41 +122,41 @@ enum {
 
 /* *INDENT-OFF* */
 KEYMAPS(
-  [_QWERTY] = KEYMAP_STACKED
-  (
-   Key_Q,              Key_W,         Key_E,            Key_R,         Key_T,
-   Key_A,              Key_S,         Key_D,            Key_F,         Key_G,
-   Key_Z,              Key_X,         Key_C,            Key_V,         Key_B,         Key_Tab,
-   OSL(_NUMPAD),        OSL(_MOUSE),  OSM(LeftGui),      Key_Esc,       Key_BSpc,      OSM(LeftAlt),
+        [_QWERTY] = KEYMAP_STACKED
+        (
+         Key_Q,              Key_W,         Key_E,            Key_R,         Key_T,
+         Key_A,              Key_S,         Key_D,            Key_F,         Key_G,
+         Key_Z,              Key_X,         Key_C,            Key_V,         Key_B,         Key_Tab,
+   OSL(_NUMPAD),        OSL(_MOUSE),  OSM(LeftGui),      Key_Esc,       Key_BSpc,     OSL(_PUNCNUMB),
 
                        Key_Y,         Key_U,            Key_I,         Key_O,         Key_P,
                        Key_H,         Key_J,            Key_K,         Key_L,         Key_Semicolon,
    Key_Enter,          Key_N,         Key_M,            Key_Comma,     Key_Period,    Key_Slash,
-   OSM(LeftShift),     Key_Space,     OSM(LeftControl),     Key_Minus,     Key_Quote,     OSL(_FUNCTION)
+   OSL(_BALANCED_SYMBOLS),     Key_Space,     OSL(_PUNCNUMB),     Key_Minus,     Key_Quote,     OSL(_FUNCTION)
   ),
 
   [_LOWER] = KEYMAP_STACKED
   (
    // Left
-   ___,              ___,           ___,                     ___,                  ___,
+   MoveToLayer(_QWERTY),              ___,           ___,                     ___,                  ___,
    ___,              ___,           ___,                     ___,                  ___,
    ___,              ___,           ___,                     ___,                  ___,              ___,
-   ___,              ___,           ___,                     ___,                  ___,              ___,
+   ___,              ___,           ___,                     ___,                  ___,              OSM(LeftAlt),
 
    // right
    Key_Minus,      Key_LeftCurlyBracket,    Key_RightCurlyBracket,   Key_LeftBracket,  Key_RightBracket,
                     Key_LeftArrow,  Key_DownArrow,           Key_UpArrow,             Key_RightArrow,   Key_Backslash,
    ___,             Key_Plus,       Key_Tilde,               Key_RightParen,          Key_Backtick,     Key_Equals,
-   ___,             ___,      ___,                     ___,                     Key_Tilde,              ___
+   ___,             Key_Tab,      ___,                     ___,                     Key_Tilde,              ___
    ),
 
   [_RAISE] = KEYMAP_STACKED
   (
    // Left
-   ___,           ___,       M(MACRO_VERSION_INFO),         /*Alfred hotkey*/ LGUI(LSHIFT(Key_Space)),              LGUI(Key_Backtick),
+   MoveToLayer(_QWERTY),           ___,       M(MACRO_VERSION_INFO),         /*Alfred hotkey*/ LGUI(LSHIFT(Key_Space)),              LGUI(Key_Backtick),
    Key_VolDn,        Key_VolUp,    Key_PrevTrack,       Key_PlayPause,       Key_NextTrack,
    ___,              ___,          ___,                 ___,                 Key_Home,        Key_PageUp,
-   ___,              ___,          ___,                 ___,                 Key_End,         Key_PageDown,
+   ___,              ___,          ___,                 Key_Esc,                 Key_End,         Key_PageDown,
 
    // Right
                     ___,          ___,      ___,             ___,             ___,
@@ -222,6 +223,21 @@ KEYMAPS(
    ___,              ___,           ___,                  ___,                  Key_0,               ___
    ),
 
+  [_BALANCED_SYMBOLS] = KEYMAP_STACKED
+  (
+   // Left
+   ___,              ___,           ___,                ___,                 Key_Tilde,
+   Key_And,              Key_Backtick,           Key_LeftBracket,                Key_LeftParen,                 Key_LeftCurlyBracket,
+   ___,              ___,           ___,                ___,                 ___,              ___,
+   ___,              ___,           ___,                ___,                 ___,              ___,
+
+   // Right
+   ___,           Key_Underscore,                Key_Tab,                ___,               LSHIFT(Key_Backslash),
+   Key_RightCurlyBracket,           Key_RightParen,                Key_RightBracket,                Key_Equals,               Key_Backslash,
+   ___,   ___,              Key_Plus,           Key_Minus,                Key_Star,                ___,               
+   ___,              ___,           ___,                ___,                ___,               ___
+   ),
+
   [_EMPTY] = KEYMAP_STACKED
   (
   // Left
@@ -280,6 +296,7 @@ void setup() {
   MouseKeys.speed = 10;
   MouseKeys.accelDelay = 35;
 
+  // KALEIDOSCOPE_INIT_PLUGINS(Macros);
 
   /**
     * Qukeys configs
@@ -297,21 +314,23 @@ void setup() {
     kaleidoscope::plugin::Qukey(0, KeyAddr(0, 3), Key_Meh),      // R/ Meh 
     kaleidoscope::plugin::Qukey(0, KeyAddr(0, 8), Key_Meh),      // U / Meh
     kaleidoscope::plugin::Qukey(0, KeyAddr(1, 0), Key_MyHyper),      // A / Hyper
-    kaleidoscope::plugin::Qukey(0, KeyAddr(1, 1), ShiftToLayer(_PUNCNUMB)),      // S / Punctuation
-    kaleidoscope::plugin::Qukey(0, KeyAddr(1, 10), ShiftToLayer(_PUNCNUMB)),      // L / Punctuation
-    kaleidoscope::plugin::Qukey(0, KeyAddr(1, 11), Key_MyHyper),      // ; / Hyper
-    kaleidoscope::plugin::Qukey(0, KeyAddr(1, 2), ShiftToLayer(_LOWER)),      // S / Punctuation
+    kaleidoscope::plugin::Qukey(0, KeyAddr(1, 1), Key_LeftControl),      // S / Control
+    kaleidoscope::plugin::Qukey(0, KeyAddr(1, 2), Key_LeftShift),      // D / Shift 
     kaleidoscope::plugin::Qukey(0, KeyAddr(1, 3), Key_LeftGui),      // F / Command
     kaleidoscope::plugin::Qukey(0, KeyAddr(1, 4), Key_LeftAlt),      // G / Option
-    kaleidoscope::plugin::Qukey(0, KeyAddr(1, 7), Key_LeftAlt),      // H / Option
-    kaleidoscope::plugin::Qukey(0, KeyAddr(1, 8), Key_LeftGui),      // J / Command
-    kaleidoscope::plugin::Qukey(0, KeyAddr(1, 9), ShiftToLayer(_RAISE)),      // K / Media + Misc
+    kaleidoscope::plugin::Qukey(0, KeyAddr(1, 7), Key_RightAlt),      // H / Option
+    kaleidoscope::plugin::Qukey(0, KeyAddr(1, 8), Key_RightGui),      // J / Command
+    kaleidoscope::plugin::Qukey(0, KeyAddr(1, 9), Key_RightShift),      // K / Shift
+    kaleidoscope::plugin::Qukey(0, KeyAddr(1, 10), Key_RightControl),      // L / Control
+    kaleidoscope::plugin::Qukey(0, KeyAddr(1, 11), Key_MyHyper),      // ; / Hyper
     kaleidoscope::plugin::Qukey(0, KeyAddr(2, 2), ShiftToLayer(_NUMPAD)),      // C / Numpad
     kaleidoscope::plugin::Qukey(0, KeyAddr(2, 3), Key_Magic),      // V / Magic
     kaleidoscope::plugin::Qukey(0, KeyAddr(2, 4), Key_CommandShift),      // B / CommandShift
     kaleidoscope::plugin::Qukey(0, KeyAddr(2, 7), Key_CommandShift),      // N / CommandShift
     kaleidoscope::plugin::Qukey(0, KeyAddr(2, 8), Key_Magic),      // M / Magic
     kaleidoscope::plugin::Qukey(0, KeyAddr(3, 3), Key_LeftControl),  // Esc / Control
+    kaleidoscope::plugin::Qukey(0, KeyAddr(3, 4), ShiftToLayer(_LOWER)),  // Space / Punctuation
+    kaleidoscope::plugin::Qukey(0, KeyAddr(3, 7), ShiftToLayer(_RAISE)),  // Space / Punctuation
          )
 }
 
