@@ -80,6 +80,7 @@ enum {
 #define Key_VolumeDown Consumer_VolumeDecrement
 #define Key_VolumeUp Consumer_VolumeIncrement
 #define Key_Mute Consumer_Mute
+#define Key_RandomPlay Consumer_RandomPlay
 #define Key_BSpc Key_Backspace
 #define Key_VolUp Consumer_VolumeIncrement
 #define Key_VolDn Consumer_VolumeDecrement
@@ -147,7 +148,7 @@ KEYMAPS(
    Key_Minus,      Key_LeftCurlyBracket,    Key_RightCurlyBracket,   Key_LeftBracket,  Key_RightBracket,
                     Key_LeftArrow,  Key_DownArrow,           Key_UpArrow,             Key_RightArrow,   Key_Backslash,
    ___,             Key_Plus,       Key_Tilde,               Key_RightParen,          Key_Backtick,     Key_Equals,
-   ___,             Key_Tab,      ___,                     ___,                     Key_Tilde,              ___
+   ___,             Key_Space,      ___,                     ___,                     Key_Tilde,              ___
    ),
 
   [_RAISE] = KEYMAP_STACKED
@@ -155,12 +156,12 @@ KEYMAPS(
    // Left
    MoveToLayer(_QWERTY),           ___,       M(MACRO_VERSION_INFO),         /*Alfred hotkey*/ LGUI(LSHIFT(Key_Space)),              LGUI(Key_Backtick),
    Key_VolDn,        Key_VolUp,    Key_PrevTrack,       Key_PlayPause,       Key_NextTrack,
-   ___,              ___,          ___,                 ___,                 Key_Home,        Key_PageUp,
-   ___,              ___,          ___,                 Key_Esc,                 Key_End,         Key_PageDown,
+   ___,              ___,          ___,                 Key_Enter,                 Key_PageUp,        Key_RandomPlay,
+   ___,              ___,          ___,                 Key_Esc,                 Key_Backspace,         Key_PageDown,
 
    // Right
                     ___,          ___,      ___,             ___,             ___,
-                    ___,         ___,     ___,            ___,            ___,
+                    ___,         ___,     ___,            Key_Tab,            ___,
    ___,             ___,         ___,                ___,                ___,              ___,
    ___,             ___,         ___,                ___,                ___,              ___
    ),
