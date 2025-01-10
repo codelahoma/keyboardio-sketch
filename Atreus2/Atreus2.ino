@@ -128,12 +128,12 @@ KEYMAPS(
          Key_Q,              Key_W,         Key_E,            Key_R,         Key_T,
          Key_A,              Key_S,         Key_D,            Key_F,         Key_G,
          Key_Z,              Key_X,         Key_C,            Key_V,         Key_B,         Key_Tab,
-   OSL(_NUMPAD),        OSL(_MOUSE),  OSM(LeftGui),      Key_Esc,       Key_BSpc,     OSL(_PUNCNUMB),
+   OSL(_NUMPAD),        OSL(_MOUSE),  OSM(LeftGui),      Key_Esc,       Key_BSpc,     OSL(_LOWER),
 
                        Key_Y,         Key_U,            Key_I,         Key_O,         Key_P,
                        Key_H,         Key_J,            Key_K,         Key_L,         Key_Semicolon,
    Key_Enter,          Key_N,         Key_M,            Key_Comma,     Key_Period,    Key_Slash,
-   OSL(_BALANCED_SYMBOLS),     Key_Space,     OSL(_PUNCNUMB),     Key_Minus,     Key_Quote,     OSL(_FUNCTION)
+   OSL(_RAISE),     Key_Space,     OSL(_PUNCNUMB),     Key_Minus,     Key_Quote,     OSL(_FUNCTION)
   ),
 
   [_LOWER] = KEYMAP_STACKED
@@ -148,7 +148,7 @@ KEYMAPS(
    Key_Minus,      Key_LeftCurlyBracket,    Key_RightCurlyBracket,   Key_LeftBracket,  Key_RightBracket,
                     Key_LeftArrow,  Key_DownArrow,           Key_UpArrow,             Key_RightArrow,   Key_Backslash,
    ___,             Key_Plus,       Key_Tilde,               Key_RightParen,          Key_Backtick,     Key_Equals,
-   ___,             Key_Space,      ___,                     ___,                     Key_Tilde,              ___
+   OSL(_PUNCNUMB),             Key_Enter,      ___,                     ___,                     Key_Tilde,              ___
    ),
 
   [_RAISE] = KEYMAP_STACKED
@@ -161,7 +161,7 @@ KEYMAPS(
 
    // Right
                     ___,          ___,      ___,             ___,             ___,
-                    ___,         ___,     ___,            Key_Tab,            ___,
+   OSM(LeftAlt),         OSM(LeftGui),     OSM(LeftShift),            OSM(LeftControl),            ___,
    ___,             ___,         ___,                ___,                ___,              ___,
    ___,             ___,         ___,                ___,                ___,              ___
    ),
@@ -206,7 +206,7 @@ KEYMAPS(
                      Key_6,             Key_7,                Key_8,                Key_9,               Key_0,
                      Key_Caret,         Key_And,              Key_Star,             Key_LeftParen,       Key_RightParen,
    XXX,              Key_Minus,         Key_Underscore,       Key_Plus,             Key_Backtick,        Key_Backslash,
-   XXX,              ___,               XXX,                  XXX,                  XXX,                 LSHIFT(Key_Backslash)
+   XXX,              Key_Enter,               XXX,                  XXX,                  XXX,                 LSHIFT(Key_Backslash)
    ),
 
   [_NUMPAD] = KEYMAP_STACKED
