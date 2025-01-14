@@ -22,6 +22,7 @@
 #endif
 
 #include "Kaleidoscope.h"
+#include "Kaleidoscope-Chord.h"
 #include "Kaleidoscope-EEPROM-Settings.h"
 #include "Kaleidoscope-FocusSerial.h"
 #include "Kaleidoscope-Macros.h"
@@ -128,41 +129,41 @@ KEYMAPS(
          Key_Q,              Key_W,         Key_E,            Key_R,         Key_T,
          Key_A,              Key_S,         Key_D,            Key_F,         Key_G,
          Key_Z,              Key_X,         Key_C,            Key_V,         Key_B,         Key_Tab,
-   OSL(_NUMPAD),        OSL(_MOUSE),  OSM(LeftGui),      Key_Esc,       Key_BSpc,     OSL(_LOWER),
+    MoveToLayer(_NUMPAD),        OSL(_MOUSE),  Key_Enter,      Key_Esc,       Key_BSpc,     OSL(_LOWER),
 
                        Key_Y,         Key_U,            Key_I,         Key_O,         Key_P,
                        Key_H,         Key_J,            Key_K,         Key_L,         Key_Semicolon,
-   Key_Enter,          Key_N,         Key_M,            Key_Comma,     Key_Period,    Key_Slash,
+         Key_Enter,          Key_N,         Key_M,            Key_Comma,     Key_Period,    Key_Slash, // 
    OSL(_RAISE),     Key_Space,     OSL(_PUNCNUMB),     Key_Minus,     Key_Quote,     OSL(_FUNCTION)
   ),
 
   [_LOWER] = KEYMAP_STACKED
   (
    // Left
-   MoveToLayer(_QWERTY),              ___,           ___,                     ___,                  ___,
-   ___,              ___,           ___,                     ___,                  ___,
+   ___,              ___,           ___,                     ___,                  Key_Tab,
+   Key_Tab,              ___,           ___,                     ___,                  ___,
    ___,              ___,           ___,                     ___,                  ___,              ___,
-   ___,              ___,           ___,                     ___,                  ___,              OSM(LeftAlt),
+   ___,              ___,           ___,                     ___,                  OSL(_BALANCED_SYMBOLS),              ___,
 
    // right
    Key_Minus,      Key_LeftCurlyBracket,    Key_RightCurlyBracket,   Key_LeftBracket,  Key_RightBracket,
                     Key_LeftArrow,  Key_DownArrow,           Key_UpArrow,             Key_RightArrow,   Key_Backslash,
-   ___,             Key_Plus,       Key_Tilde,               Key_RightParen,          Key_Backtick,     Key_Equals,
-   OSL(_PUNCNUMB),             Key_Enter,      ___,                     ___,                     Key_Tilde,              ___
+   ___,             Key_Plus,       Key_Tilde,               ___,          Key_Backtick,     Key_Equals,
+   OSL(_BALANCED_SYMBOLS),             Key_Enter,      ___,                     ___,                     ___,              OSM(LeftShift)
    ),
 
   [_RAISE] = KEYMAP_STACKED
   (
    // Left
-   MoveToLayer(_QWERTY),           ___,       M(MACRO_VERSION_INFO),         /*Alfred hotkey*/ LGUI(LSHIFT(Key_Space)),              LGUI(Key_Backtick),
+   Key_Backtick,           ___,       M(MACRO_VERSION_INFO),         /*Alfred hotkey*/ LGUI(LSHIFT(Key_Space)),              LGUI(Key_Backtick),
    Key_VolDn,        Key_VolUp,    Key_PrevTrack,       Key_PlayPause,       Key_NextTrack,
-   ___,              ___,          ___,                 Key_Enter,                 Key_PageUp,        Key_RandomPlay,
-   ___,              ___,          ___,                 Key_Esc,                 Key_Backspace,         Key_PageDown,
+   ___,              ___,          ___,                 ___,                 ___,        Key_PageUp,
+   ___,              ___,          ___,                 Key_Esc,                 Key_Enter,         OSL(_BALANCED_SYMBOLS),
 
    // Right
                     ___,          ___,      ___,             ___,             ___,
-   OSM(LeftAlt),         OSM(LeftGui),     OSM(LeftShift),            OSM(LeftControl),            ___,
-   ___,             ___,         ___,                ___,                ___,              ___,
+                    ___,             OSM(LeftGui),     OSM(LeftShift),            OSM(LeftControl),            OSM(LeftAlt),
+   ___,             ___,         Key_Mute,                ___,                ___,              ___,
    ___,             ___,         ___,                ___,                ___,              ___
    ),
 
@@ -218,10 +219,10 @@ KEYMAPS(
    ___,              ___,           ___,                ___,                 ___,              ___,
 
    // right
-   /*            */  ___,           Key_7,                Key_8,                Key_9,               Key_0,
-   /*            */  ___,           Key_4,                Key_5,                Key_6,               Key_Colon,
-   ___,              ___,           Key_1,                Key_2,                Key_3,               ___,
-   ___,              ___,           ___,                  ___,                  Key_0,               ___
+   /*            */  Key_Enter,           Key_Keypad7,                Key_Keypad8,                Key_Keypad9,               Key_KeypadSubtract,
+   /*            */  ___,           Key_Keypad4,                Key_Keypad5,                Key_Keypad6,               Key_KeypadAdd,
+   ___,              ___,           Key_Keypad1,                Key_Keypad2,                Key_Keypad3,               Key_KeypadEquals,
+   ___,              ___,           Key_Keypad0,                  Key_KeypadDot,                  Key_KeypadMultiply,               Key_KeypadDivide
    ),
 
   [_BALANCED_SYMBOLS] = KEYMAP_STACKED
@@ -231,12 +232,12 @@ KEYMAPS(
    Key_And,              Key_Backtick,           Key_LeftBracket,                Key_LeftParen,                 Key_LeftCurlyBracket,
    ___,              ___,           ___,                ___,                 ___,              ___,
    ___,              ___,           ___,                ___,                 ___,              ___,
-
+   
    // Right
    ___,           Key_Underscore,                Key_Tab,                ___,               LSHIFT(Key_Backslash),
    Key_RightCurlyBracket,           Key_RightParen,                Key_RightBracket,                Key_Equals,               Key_Backslash,
    ___,   ___,              Key_Plus,           Key_Minus,                Key_Star,                ___,               
-   ___,              ___,           ___,                ___,                ___,               ___
+   ___,              Key_Escape,           ___,                ___,                ___,               ___
    ),
 
   [_EMPTY] = KEYMAP_STACKED
@@ -256,21 +257,12 @@ KEYMAPS(
 )
 /* *INDENT-ON* */
 
-const macro_t *macroAction(uint8_t macroIndex, uint8_t keyState) {
+const macro_t *macroAction(uint8_t macroIndex, KeyEvent &event) {
   switch (macroIndex) {
-  case MACRO_QWERTY:
-    // This macro is currently unused, but is kept around for compatibility
-    // reasons. We used to use it in place of `MoveToLayer(_QWERTY)`, but no
-    // longer do. We keep it so that if someone still has the old layout with
-    // the macro in EEPROM, it will keep working after a firmware update.
-    Layer.move(_QWERTY);
-    break;
   case MACRO_VERSION_INFO:
-    Macros.type(PSTR("Keyboardio Atreus - Kaleidoscope "));
-    Macros.type(PSTR(BUILD_INFORMATION));
-    break;
-  default:
-    break;
+    if (keyToggledOn(event.state)) {
+      return Macros.type(PSTR(BUILD_INFORMATION));
+    }
   }
 
   return MACRO_NONE;
@@ -278,6 +270,7 @@ const macro_t *macroAction(uint8_t macroIndex, uint8_t keyState) {
 
 KALEIDOSCOPE_INIT_PLUGINS(
                           Qukeys,
+                          Chord,
                           EEPROMSettings,
                           Focus,
                           FocusEEPROMCommand,
@@ -291,7 +284,9 @@ KALEIDOSCOPE_INIT_PLUGINS(
 void setup() {
   Kaleidoscope.setup();
 
-  OneShot.enableAutoModifiers();
+  CHORDS(
+         CHORD(Key_J, Key_K), Key_Escape,
+)
 
   // MouseWrapper.speedLimit = 128;
   MouseKeys.speed = 10;
@@ -314,24 +309,24 @@ void setup() {
   QUKEYS(
     kaleidoscope::plugin::Qukey(0, KeyAddr(0, 3), Key_Meh),      // R/ Meh 
     kaleidoscope::plugin::Qukey(0, KeyAddr(0, 8), Key_Meh),      // U / Meh
-    kaleidoscope::plugin::Qukey(0, KeyAddr(1, 0), Key_MyHyper),      // A / Hyper
+    kaleidoscope::plugin::Qukey(0, KeyAddr(1, 0), Key_LeftAlt),      // A / Option
     kaleidoscope::plugin::Qukey(0, KeyAddr(1, 1), Key_LeftControl),      // S / Control
     kaleidoscope::plugin::Qukey(0, KeyAddr(1, 2), Key_LeftShift),      // D / Shift 
     kaleidoscope::plugin::Qukey(0, KeyAddr(1, 3), Key_LeftGui),      // F / Command
-    kaleidoscope::plugin::Qukey(0, KeyAddr(1, 4), Key_LeftAlt),      // G / Option
-    kaleidoscope::plugin::Qukey(0, KeyAddr(1, 7), Key_RightAlt),      // H / Option
+    kaleidoscope::plugin::Qukey(0, KeyAddr(1, 4), Key_MyHyper),      // G / Hyper
+    kaleidoscope::plugin::Qukey(0, KeyAddr(1, 7), Key_MyHyper),      // H / Hyper
     kaleidoscope::plugin::Qukey(0, KeyAddr(1, 8), Key_RightGui),      // J / Command
     kaleidoscope::plugin::Qukey(0, KeyAddr(1, 9), Key_RightShift),      // K / Shift
     kaleidoscope::plugin::Qukey(0, KeyAddr(1, 10), Key_RightControl),      // L / Control
-    kaleidoscope::plugin::Qukey(0, KeyAddr(1, 11), Key_MyHyper),      // ; / Hyper
+    kaleidoscope::plugin::Qukey(0, KeyAddr(1, 11), Key_LeftAlt),      // ; / Option
     kaleidoscope::plugin::Qukey(0, KeyAddr(2, 2), ShiftToLayer(_NUMPAD)),      // C / Numpad
     kaleidoscope::plugin::Qukey(0, KeyAddr(2, 3), Key_Magic),      // V / Magic
     kaleidoscope::plugin::Qukey(0, KeyAddr(2, 4), Key_CommandShift),      // B / CommandShift
     kaleidoscope::plugin::Qukey(0, KeyAddr(2, 7), Key_CommandShift),      // N / CommandShift
     kaleidoscope::plugin::Qukey(0, KeyAddr(2, 8), Key_Magic),      // M / Magic
-    kaleidoscope::plugin::Qukey(0, KeyAddr(3, 3), Key_LeftControl),  // Esc / Control
-    kaleidoscope::plugin::Qukey(0, KeyAddr(3, 4), ShiftToLayer(_LOWER)),  // Space / Punctuation
-    kaleidoscope::plugin::Qukey(0, KeyAddr(3, 7), ShiftToLayer(_RAISE)),  // Space / Punctuation
+    // kaleidoscope::plugin::Qukey(0, KeyAddr(3, 3), Key_LeftControl),  // Esc / Control
+    // kaleidoscope::plugin::Qukey(0, KeyAddr(3, 4), ShiftToLayer(_LOWER)),  // Space / Punctuation
+    // kaleidoscope::plugin::Qukey(0, KeyAddr(3, 7), ShiftToLayer(_RAISE)),  // Space / Punctuation
          )
 }
 
